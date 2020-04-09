@@ -41,37 +41,44 @@
 </style>
 
 <div>
-  <h3>Flower Label</h3>
-  Red - r01 to r13, r01=seed
-  <br>Yellow - y01 to y18, y01=seed
-  <br>White - w01 to w18, w01=seed
-  <br>Purple - u01 to u09
-  <br>Pink - p01 to p09
-  <br>Orange - o01 to o09
-  <br>Black - h01 to h04
-  <br>Blue - b01
+  <h3>TESTING</h3>
+  <table>
+    <tr>
+      <th>VARIANT</th><th>LABEL</th><th>ROSE</th><th>PANSY</th><th>TULIP</th><th>COSMOS</th>
+    </tr>
+    <tr><th>RED</th><td>r</td><td>01-13</td></td><td>01-06</td><td>01-05</td><td>01-05</td></tr>
+    <tr><th>YELLOW</th><td>r</td><td>01-18</td><td>01-08</td><td>01-09</td><td>01-05</td></tr>
+    <tr><th>WHITE</th><td>w</td><td>01-18</td><td>01-02</td><td>01-05</td><td>01-04</td></tr>
+    <tr><th>ORANGE</th><td>o</td><td>01-09</td><td>01-05</td><td>01-02</td><td>01-07</td></tr>
+    <tr><th>PINK</th><td>p</td><td>01-09</td><td>-</td><td>01</td><td>01-04</td></tr>
+    <tr><th>PURPLE</th><td>u</td><td>01-09</td><td>01-03</td><td>01-03</td><td>-</td></tr>
+    <tr><th>BLUE</th><td>b</td><td>01</td><td>01-03</td><td>-</td><td>-</td></tr>
+    <tr><th>BLACK</th><td>h</td><td>01-04</td><td>-</td><td>01-02</td><td>01-02</td></tr>
+  </table>
+  *01 represents seed if applicable, i.e. r01 is red seed.
 </div>
 
 <hr>
 
 <div>
+  <h3>1) SELECT FLOWER TYPE</h3>
   <label>Flower Type</label>
   <select id="type">
     <option value="roses">Rose</option>
     <option value="pansies">Pansy</option>
     <option value="tulips">Tulip</option>
     <option value="cosmos">Cosmos</option>
-    <option value="lilies">Lily</option>
   </select>
 </div>
 
 <hr>
 
+<h3>2) FINDOUT POSSIBLE OFFSPRING</h3>
 <div>
-  <label>Parent A</label><input id="pa"></input>
+  <label>Parent A</label><input id="pa" placeholder="e.g. r01"></input>
 </div>
 <div>
-  <label>Parent B</label><input id="pb"></input>
+  <label>Parent B</label><input id="pb" placeholder="e.g. r02"></input>
 </div>
 <div>
   <button onclick="checkOffSpring()">Check Offspring</button>
@@ -87,8 +94,9 @@
 
 <hr>
 
+<h3>ONLY FOR ROSES AT THE MOMENT</h3>
 <div>
-  <label>Child</label><input id="child"></input>
+  <label>Result</label><input id="child" placeholder="e.g. b01"></input>
 </div>
 <button onclick="checkParent()">Check Parent</button>
 
@@ -198,7 +206,7 @@ var pansies = [
 //blue
 {'r':'00','y':'00','w':'11','color':'blue','label':'b01'},
 {'r':'00','y':'01','w':'11','color':'blue','label':'b02'},
-{'r':'01','y':'00','w':'11','color':'blue','label':'b02'},
+{'r':'01','y':'00','w':'11','color':'blue','label':'b03'},
 //orange
 {'r':'01','y':'01','w':'00','color':'orange','label':'o01'},
 {'r':'01','y':'01','w':'01','color':'orange','label':'o02'},
@@ -233,7 +241,7 @@ var pansies = [
 var cosmos = [
 //black
 {'r':'11','y':'11','s':'00','color':'black','label':'h01'},
-{'r':'11','y':'11','s':'01','color':'black','label':'h01'},
+{'r':'11','y':'11','s':'01','color':'black','label':'h02'},
 //orange
 {'r':'01','y':'01','s':'00','color':'orange','label':'o01'},
 {'r':'01','y':'01','s':'01','color':'orange','label':'o02'},
@@ -243,10 +251,10 @@ var cosmos = [
 {'r':'11','y':'01','s':'00','color':'orange','label':'o06'},
 {'r':'11','y':'01','s':'01','color':'orange','label':'o07'},
 //pink
-{'r':'01','y':'00','s':'00','color':'pink','label':'p0'},
-{'r':'01','y':'00','s':'01','color':'pink','label':'p0'},
-{'r':'01','y':'00','s':'11','color':'pink','label':'p0'},
-{'r':'01','y':'01','s':'11','color':'pink','label':'p0'},
+{'r':'01','y':'00','s':'00','color':'pink','label':'p01'},
+{'r':'01','y':'00','s':'01','color':'pink','label':'p02'},
+{'r':'01','y':'00','s':'11','color':'pink','label':'p03'},
+{'r':'01','y':'01','s':'11','color':'pink','label':'p04'},
 //red
 {'r':'11','y':'00','s':'01','color':'red','label':'r02'},
 {'r':'11','y':'00','s':'11','color':'red','label':'r03'},
@@ -458,6 +466,17 @@ function checkOffSpring() {
   }
   genea = _.find(flower, { 'label':pa });
   geneb = _.find(flower, { 'label':pb });
+
+  if (genea == undefined)
+  {
+    alert('Invalid parent A. Please refer to the table.');
+    return;
+  }
+  if (geneb == undefined)
+  {
+    alert('Invalid parent B. Please refer to the table.');
+    return;
+  }
 
   var geneSet = new Array;
   var outcomeSet = new Array;
