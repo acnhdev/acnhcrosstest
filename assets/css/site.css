@@ -1,0 +1,40 @@
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 10px;
+}
+
+.red {
+ background-color:red;
+}
+.yellow {
+ background-color:yellow;
+}
+.white {
+ background-color:white;
+}
+.blue {
+ background-color:blue;
+ color: white;
+}
+.pink {
+ background-color:pink;
+}
+.orange {
+ background-color:orange;
+}
+.black {
+ background-color:black;
+ color: white;
+}
+.purple {
+ background-color:purple;
+ color: white;
+}
