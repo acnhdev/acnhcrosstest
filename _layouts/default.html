@@ -36,7 +36,73 @@
     </header>
 
     <main id="content" class="main-content" role="main">
-      {{ content }}
+      <div>
+  <h3>TESTING</h3>
+  <table>
+    <tr>
+      <th>VARIANT</th><th>LABEL</th><th>ROSE</th><th>PANSY</th><th>TULIP</th><th>COSMOS</th>
+    </tr>
+    <tr><th>RED</th><td>r</td><td>01-13</td><td>01-06</td><td>01-05</td><td>01-05</td></tr>
+    <tr><th>YELLOW</th><td>r</td><td>01-18</td><td>01-08</td><td>01-09</td><td>01-05</td></tr>
+    <tr><th>WHITE</th><td>w</td><td>01-18</td><td>01-02</td><td>01-05</td><td>01-04</td></tr>
+    <tr><th>ORANGE</th><td>o</td><td>01-09</td><td>01-05</td><td>01-02</td><td>01-07</td></tr>
+    <tr><th>PINK</th><td>p</td><td>01-09</td><td>-</td><td>01</td><td>01-04</td></tr>
+    <tr><th>PURPLE</th><td>u</td><td>01-09</td><td>01-03</td><td>01-03</td><td>-</td></tr>
+    <tr><th>BLUE</th><td>b</td><td>01</td><td>01-03</td><td>-</td><td>-</td></tr>
+    <tr><th>BLACK</th><td>h</td><td>01-04</td><td>-</td><td>01-02</td><td>01-02</td></tr>
+  </table>
+  *01 represents seed if applicable, i.e. r01 is red seed.
+</div>
+
+<hr>
+
+<div>
+  <h3>1) SELECT FLOWER TYPE</h3>
+  <label>Flower Type</label>
+  <select id="type">
+    <option value="roses">Rose</option>
+    <option value="pansies">Pansy</option>
+    <option value="tulips">Tulip</option>
+    <option value="cosmos">Cosmos</option>
+  </select>
+</div>
+
+<hr>
+
+<h3>2) FINDOUT POSSIBLE OFFSPRING</h3>
+<div>
+  <label>Parent A</label><input id="pa" placeholder="e.g. r01"></input>
+</div>
+<div>
+  <label>Parent B</label><input id="pb" placeholder="e.g. r02"></input>
+</div>
+<div>
+  <button onclick="checkOffSpring()">Check Offspring</button>
+
+  <table id="resultTable" style="display:none;">
+    <thead>
+      <tr><th>NO</th><th>R</th><th>Y</th><th>W</th><th>S</th><th>COLOR</th><th>LABEL</th></tr>
+    </thead>
+    <tbody id="resultBody">
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<h3>ONLY FOR ROSES AT THE MOMENT</h3>
+<div>
+  <label>Result</label><input id="child" placeholder="e.g. b01"></input>
+</div>
+<button onclick="checkParent()">Check Parent</button>
+
+<table id="resultTable2" style="display:none;">
+  <thead>
+    <tr><th>NO</th><th>Parent 1</th><th>Color</th><th>Parent 2</th><th>Color</th></tr>
+  </thead>
+  <tbody id="resultBody2">
+  </tbody>
+</table>
 
       <footer class="site-footer">
         {% if site.github.is_project_page %}
@@ -46,6 +112,7 @@
       </footer>
     </main>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"></script>
     <script type="text/javascript" src="/FlowerResult/assets/js/site.js"></script>
   </body>
 </html>
