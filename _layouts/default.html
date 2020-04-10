@@ -158,17 +158,20 @@
 
 <h1>HOW TO USE THE SIMULATOR</h1>
 <p>Note : Simulation only, real game logic can be different, and self pollination is not taken into account.</p>
+      
+      <p>Credit to the suthors of this <a href="https://docs.google.com/document/d/1ARIQCUc5YVEd01D7jtJT9EEJF45m07NXhAm4fOpNvCs/edit">article</a> and this <a href="https://docs.google.com/spreadsheets/d/1rbYbQ0i3SuTu30KTma5dO4uuJWr_SjOZXA1l4UOIHWo/edit">article</a> for all the information on flower genes and color.</p>
 
 <h4>DEFINING FLOWER VARIANT</h4>
 
 <p>You can use the two character hex value of the flowers. (e.g. 00, 4f, ..)</p>
-<p>I have also self-defined labels for each variant in order for me to keep track of my flowers. You may use it to define the flower too. It is a 3 characters string, the first being the color code (refer table) followed by two digits number.</p>
+<p>Else, I have also self-defined labels for each variant in order for me to keep track of my flowers. You may use it to define the flower too. It is a 3 characters string, the first being the color code (refer table) followed by two digits number.</p>
 <p>For example, r04 means red variant 4, u01 means purple variant 1 etc.</p>
-<p>Seed color will always be represented by number one, e.g. r01 is red seed, y01 is yellow seed.</p>
+<p>Seed color will always be represented by number one, e.g. r01 is red seed, y01 is yellow seed and w01 is yellow seed.</p>
 
-<h5>Example</h5>      
-<p>To get result for crossing two red seed roses, I can use hex value and key in 'c1' for parent A and parent B. I can also use label which is 'r01'.</p>
-      <div>
+<h4>Example</h4>      
+<p>I want to get result for crossing two red seed roses, I will key in 'r01' for parent A and parent B. If I know the hex value, I can key in 'c1' instead.</p>
+<p>From the result I can see that I can get black rose(h01). I want to know what will I get if I crossbreed it with a yellow seed rose, so I change the parent codes to 'h01' and 'y01' then check the result again.</p>
+<div>
   <h4>SELECT FLOWER TYPE</h4>
   <label>Flower Type</label>
   <select id="type">
@@ -182,23 +185,28 @@
     <option value="windflowers">Windflower</option>
   </select>
 </div>
+<h4>CHOOSE WHAT TO CHECK</h4>
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'offspring')">Check Offspring</button>
-  <button class="tablinks" onclick="openTab(event, 'parent')">Get Parent</button>
+  <button class="tablinks" onclick="openTab(event, 'parent')">Check Parent</button>
 </div>
 
 <div id="offspring" class="tabcontent">
   <div>
-  <label>Parent A</label><input id="pa" placeholder="e.g. 1c, r01"></input>
+  <label>Parent A</label><input id="pa" placeholder="e.g. r01, c1"></input>
 </div>
 <div>
-  <label>Parent B</label><input id="pb" placeholder="e.g. 03, y02"></input>
+  <label>Parent B</label><input id="pb" placeholder="e.g. y02, 03"></input>
 </div>
 <div>
   <button onclick="checkOffSpring()">Check Offspring</button>
 </div>
 
 <div id="parent" class="tabcontent">
+  <div>
+  <label>Offspring</label><input id="child" placeholder="e.g. b01, 3d"></input>
+</div>
+<button onclick="checkParent()">Check Parent</button>
 </div>
 
 
