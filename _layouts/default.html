@@ -13,6 +13,7 @@
     {% endif %}
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/tab.css' | relative_url }}">
 
 {% seo %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -188,8 +189,13 @@
     <option value="windflowers">Windflower</option>
   </select>
 </div>
-      
-<div>
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'offspring')">Check Offspring</button>
+  <button class="tablinks" onclick="openTab(event, 'parent')">Get Parent</button>
+</div>
+
+<div id="offspring" class="tabcontent">
+  <div>
   <label>Parent A</label><input id="pa" placeholder="e.g. 1c, r01"></input>
 </div>
 <div>
@@ -197,6 +203,11 @@
 </div>
 <div>
   <button onclick="checkOffSpring()">Check Offspring</button>
+</div>
+
+<div id="parent" class="tabcontent">
+</div>
+
 
   <table id="resultTable" style="display:none;">
     <thead>
@@ -218,5 +229,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"></script>
     <script type="text/javascript" src="{{ '/assets/js/flowerdb.js' | relative_url }}"></script>
     <script type="text/javascript" src="{{ '/assets/js/site.js' | relative_url }}"></script>
+    <script type="text/javascript" src="{{ '/assets/js/tab.js' | relative_url }}"></script>
   </body>
 </html>
