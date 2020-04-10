@@ -17,6 +17,7 @@ var resultSet2 = new Array;
 var tmpArray = new Array;
 var flagR, flagY, flagW, flagS;
 var flower;
+var child;
 
 function setFlower(value) {
   switch (value) {
@@ -48,7 +49,7 @@ function setFlower(value) {
   }
 }
 
-function checkParent()
+function checkParent(val)
 {
   clearTable2();
   var possibleRPatterns, possibleYPatterns, possibleWPatterns, possibleSPatterns;
@@ -63,7 +64,7 @@ function checkParent()
 
   setFlower(document.getElementById('type').value);
 
-  var child = getFlower(document.getElementById('child').value);
+  child = getFlower(val);
   if (child == undefined)
   {
     alert('Invalid child. Please refer to the table for valid variant.');
@@ -129,10 +130,23 @@ function getDuplicate() {
 }
 
 function printResult2(item, index) {
+  var percentage = 0;
   var parent1 = _.find(flower, { 'r':item.substr(0,2), 'y':item.substr(2,2), 'w':item.substr(4,2), 's':item.slice(-2) });
   var parent2 = _.find(flower, { 'r':resultSet2[count].substr(0,2), 'y':resultSet2[count].substr(2,2), 'w':resultSet2[count].substr(4,2), 's':resultSet2[count].slice(-2) });
   if(parent1!=undefined && parent2!=undefined)
   {
+    getOffSpringResult(parent1.label, parent2.label);
+    for (i=0; i<resultSet.length; i++)
+    {
+      if (resultSet[i].s==undefined) resultSet[i].s='00';
+      var result = _.find(flower, { 'r':resultSet[i].r, 'y':resultSet[i].y, 'w':resultSet[i].w, 's':resultSet[i].s });
+      if (result.label == child.label)
+      {
+        percentage = Number(Math.round(resultSet[i].count / resultSet.totalResult * 100 + 'e2') + 'e-2');
+        break;
+      }
+    }
+    
     var table = document.getElementById("resultTable2").getElementsByTagName('tbody')[0];
     var row = table.insertRow();
     var cell1 = row.insertCell(0);
@@ -142,6 +156,7 @@ function printResult2(item, index) {
     var cell5 = row.insertCell(4);
     var cell6 = row.insertCell(5);
     var cell7 = row.insertCell(6);
+    var cell8 = row.insertCell(7);
     count+=1;
     cell1.innerHTML = count;
     cell2.innerHTML = parent1.label;
@@ -152,14 +167,18 @@ function printResult2(item, index) {
     cell6.innerHTML = parent2.hex;
     cell7.innerHTML = parent2.color;
     cell7.setAttribute('class', parent2.color);
+    cell8.innerHTML = percentage;
   }
 }
 
-function checkOffSpring() {
+function checkOffSpring(pa, pb) {
   clearTable();
+  getOffSpringResult(pa, pb);
+  printOffspringResult();
+}
+
+function getOffSpringResult(pa, pb) {
   resultSet = [];
-  var pa = document.getElementById('pa').value;
-  var pb = document.getElementById('pb').value;
   var geneA, geneB;
   var g_r, g_y, g_w, g_s;
   var totalResult = 0;
@@ -286,24 +305,20 @@ function checkOffSpring() {
     }
   }
   resultSet.totalResult = totalResult;
+};
 
+function printOffspringResult()
+{
   //print result
   count=0;
   clearTable();
   resultSet.forEach(printResult);
-};
+}
 
 function printResult(item, index) {
   count+=1;
-  var result;
-  if (document.getElementById('type').value == 'roses')
-  {
-    result = _.find(flower, { 'r':item.r, 'y':item.y, 'w':item.w, 's':item.s });
-  }
-  else
-  {
-    result = _.find(flower, { 'r':item.r, 'y':item.y, 'w':item.w });
-  }
+  if (item.s==undefined) item.s='00';
+  var result = _.find(flower, { 'r':item.r, 'y':item.y, 'w':item.w, 's':item.s });
   var table = document.getElementById("resultTable").getElementsByTagName('tbody')[0];
   var row = table.insertRow();
   var cell1 = row.insertCell(0);
