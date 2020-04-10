@@ -1,13 +1,13 @@
 var crossTable = [
-{'pattern':'0000','outcome':['00','00','00','00'],'count':1},
-{'pattern':'0001','outcome':['00','01','00','01'],'count':2},
-{'pattern':'0011','outcome':['01','01','01','01'],'count':1},
-{'pattern':'1100','outcome':['01','01','01','01'],'count':1},
-{'pattern':'1101','outcome':['01','11','01','11'],'count':2},
-{'pattern':'1111','outcome':['11','11','11','11'],'count':1},
-{'pattern':'0100','outcome':['00','00','01','01'],'count':2},
-{'pattern':'0101','outcome':['00','01','01','11'],'count':3},
-{'pattern':'0111','outcome':['01','01','11','11'],'count':2}
+{'pattern':'0000','count':1,'child1':'00'},
+{'pattern':'0001','count':2,'child1':'00', 'child2':'01'},
+{'pattern':'0011','count':1,'child1':'01'},
+{'pattern':'1100','count':1,'child1':'01'},
+{'pattern':'1101','count':2,'child1':'10', 'child2':'11'},
+{'pattern':'1111','count':1,'child1':'11'},
+{'pattern':'0100','count':2,'child1':'00', 'child2':'01'},
+{'pattern':'0101','count':3,'child1':'00', 'child2':'11', 'child3':'01'},
+{'pattern':'0111','count':2,'child1':'01', 'child2':'11'}
 ];
 
 var count = 0;
@@ -18,113 +18,8 @@ var tmpArray = new Array;
 var flagR, flagY, flagW, flagS;
 var flower;
 
-function checkParent() {
-  resultSet1 = [];
-  resultSet2 = [];
-  tmpArray = [];
-  var child = _.find(roses, { 'label':document.getElementById('child').value });
-  var possibleRPatterns = _.filter(patterns, obj => obj.child1 == child.r || obj.child2 == child.r || obj.child2 == child.r);
-  var possibleYPatterns = _.filter(patterns, obj => obj.child1 == child.y || obj.child2 == child.y || obj.child2 == child.y);
-  var possibleWPatterns = _.filter(patterns, obj => obj.child1 == child.w || obj.child2 == child.w || obj.child2 == child.w);
-  var possibleSPatterns = _.filter(patterns, obj => obj.child1 == child.s || obj.child2 == child.s || obj.child2 == child.s);
-  var totalOutcome = possibleRPatterns.length * possibleYPatterns.length * possibleWPatterns.length * possibleSPatterns.length;
-  var currentr = 1;
-  var currenty = 1;
-  var currentw = 1;
-  var currents = 0;
-
-  for (i=totalOutcome; i>0; i--)
-  {
-    currents += 1;
-    if(currents>possibleSPatterns.length)
-    {
-      currents = 1;
-      currentw += 1;
-    }
-    if(currentw>possibleWPatterns.length)
-    {
-      currents = 1;
-      currentw = 1;
-      currenty += 1;
-    }
-    if(currenty>possibleYPatterns.length)
-    {
-      currents = 1;
-      currentw = 1;
-      currenty = 1;
-      currentr += 1;
-    }
-
-    var pr = possibleRPatterns[currentr-1].pattern;
-    var py = possibleYPatterns[currenty-1].pattern;
-    var pw = possibleWPatterns[currentw-1].pattern;
-    var ps = possibleSPatterns[currents-1].pattern;
-
-    resultSet1.push( pr.substr(0,2).concat(py.substr(0,2).concat(pw.substr(0,2).concat(ps.substr(0,2)))) );
-    resultSet2.push( pr.slice(-2).concat(py.slice(-2).concat(pw.slice(-2).concat(ps.slice(-2)))) );
-  }
-  resultSet1.forEach(removeDuplicate);
-  for (i=(tmpArray.length-1); i>=0; i--)
-  {
-    resultSet1.splice(tmpArray[i], 1);
-    resultSet2.splice(tmpArray[i], 1);
-  }
-
-  count=0;
-  document.getElementById("resultBody2").innerHTML = '';
-  document.getElementById("resultTable2").setAttribute('style', '');
-  resultSet1.forEach(printResult2);
-}
-
-function removeDuplicate(item, index) {
-	for (i=(resultSet2.length-1); i>=0; i--)
-	{
-		var p2 = resultSet2[i];
-		if (p2 == item && (i!=index))
-		{
-			if (resultSet1[i] == resultSet2[index])
-			{
-				tmpArray.push(index);
-				break;
-			}
-		}
-	}
-}
-
-function printResult2(item, index) {
-  var parent1 = _.find(roses, { 'r':item.substr(0,2), 'y':item.substr(2,2), 'w':item.substr(4,2), 's':item.slice(-2) });
-  var parent2 = _.find(roses, { 'r':resultSet2[count].substr(0,2), 'y':resultSet2[count].substr(2,2), 'w':resultSet2[count].substr(4,2), 's':resultSet2[count].slice(-2) });
-  var table = document.getElementById("resultTable2").getElementsByTagName('tbody')[0];
-  var row = table.insertRow();
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
-  var cell3 = row.insertCell(2);
-  var cell4 = row.insertCell(3);
-  var cell5 = row.insertCell(4);
-  count+=1;
-  cell1.innerHTML = count;
-  cell2.innerHTML = parent1.label;
-  cell3.innerHTML = parent1.color;
-  cell3.setAttribute('class', parent1.color);
-  cell4.innerHTML = parent2.label;
-  cell5.innerHTML = parent2.color;
-  cell5.setAttribute('class', parent2.color);
-}
-
-function checkOffSpring() {
-  clearTable();
-  resultSet = [];
-  var pa = document.getElementById('pa').value;
-  var pb = document.getElementById('pb').value;
-  var geneA, geneB;
-  var g_r, g_y, g_w, g_s;
-  var totalResult = 0;
-  flagR = true;
-  flagY = true;
-  flagW = true;
-  flagS = false;
-
-  switch (document.getElementById('type').value) {
+function setFlower(value) {
+  switch (value) {
     case 'roses':
       flower = roses;
       flagS = true;
@@ -151,18 +46,147 @@ function checkOffSpring() {
       flower = mums;
       break;
   }
+}
+
+function checkParent()
+{
+  clearTable2();
+  var possibleRPatterns, possibleYPatterns, possibleWPatterns, possibleSPatterns;
+  resultSet = [];
+  resultSet1 = [];
+  resultSet2 = [];
+  tmpArray=[];
+  flagR = true;
+  flagY = true;
+  flagW = true;
+  flagS = false;
+
+  setFlower(document.getElementById('type').value);
+
+  var child = getFlower(document.getElementById('child').value);
+  if (child == undefined)
+  {
+    alert('Invalid child. Please refer to the table for valid variant.');
+    return;
+  }
+
+  if (flagR) possibleRPatterns = _.filter(crossTable, obj => obj.child1 == child.r || obj.child2 == child.r || obj.child3 == child.r);
+  if (flagY) possibleYPatterns = _.filter(crossTable, obj => obj.child1 == child.y || obj.child2 == child.y || obj.child3 == child.y);
+  if (flagW) possibleWPatterns = _.filter(crossTable, obj => obj.child1 == child.w || obj.child2 == child.w || obj.child3 == child.w);
+  if (flagS) possibleSPatterns = _.filter(crossTable, obj => obj.child1 == child.s || obj.child2 == child.s || obj.child3 == child.s);
+
+  console.log(flagW);
+  console.log(possibleWPatterns);
+
+  var totalOutcome = possibleRPatterns.length;
+  if (flagY) totalOutcome = totalOutcome * possibleYPatterns.length;
+  if (flagW) totalOutcome = totalOutcome * possibleWPatterns.length;
+  if (flagS) totalOutcome = totalOutcome * possibleSPatterns.length;
+
+  for (r=0; r<possibleRPatterns.length; r++)
+  {
+    for (y=0; y<possibleRPatterns.length; y++)
+    {
+      for (w=0; w<possibleWPatterns.length; w++)
+      {
+        if (flagS)
+        {
+          for (s=0; s<possibleSPatterns.length; s++)
+          {
+            resultSet1.push(possibleRPatterns[r].pattern.substr(0,2).concat(possibleYPatterns[y].pattern.substr(0,2).concat(possibleWPatterns[w].pattern.substr(0,2).concat(possibleSPatterns[s].pattern.substr(0,2)))));
+            resultSet2.push(possibleRPatterns[r].pattern.slice(-2).concat(possibleYPatterns[y].pattern.slice(-2).concat(possibleWPatterns[w].pattern.slice(-2).concat(possibleSPatterns[s].pattern.slice(-2)))));
+          }
+        }
+        else
+        {
+          resultSet1.push(possibleRPatterns[r].pattern.substr(0,2).concat(possibleYPatterns[y].pattern.substr(0,2).concat(possibleWPatterns[w].pattern.substr(0,2))).concat('00'));
+          resultSet2.push(possibleRPatterns[r].pattern.slice(-2).concat(possibleYPatterns[y].pattern.slice(-2).concat(possibleWPatterns[w].pattern.slice(-2))).concat('00'));
+        }  
+      }
+    }
+  }
+
+  //remove duplicates
+  resultSet1.forEach(getDuplicate);
+  for (i=(tmpArray.length-1); i>=0; i--)
+  {
+    resultSet1.splice(tmpArray[i], 1);
+    resultSet2.splice(tmpArray[i], 1);
+  }
+
+  count=0;
+  clearTable2();
+  resultSet1.forEach(printResult2);
+}
+
+function getDuplicate(item, index) {
+	for (i=(resultSet2.length-1); i>=0; i--)
+	{
+		var p2 = resultSet2[i];
+		if (p2 == item && (i!=index))
+		{
+			if (resultSet1[i] == resultSet2[index])
+			{
+				tmpArray.push(index);
+				break;
+			}
+		}
+	}
+}
+
+function printResult2(item, index) {
+  console.log(item);
+  var parent1 = _.find(flower, { 'r':item.substr(0,2), 'y':item.substr(2,2), 'w':item.substr(4,2), 's':item.slice(-2) });
+  var parent2 = _.find(flower, { 'r':resultSet2[count].substr(0,2), 'y':resultSet2[count].substr(2,2), 'w':resultSet2[count].substr(4,2), 's':resultSet2[count].slice(-2) });
+  console.log(parent1);
+  console.log(parent2);
+  if(parent1!=undefined && parent2!=undefined)
+  {
+    console.log('found');
+    var table = document.getElementById("resultTable2").getElementsByTagName('tbody')[0];
+    var row = table.insertRow();
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
+    count+=1;
+    cell1.innerHTML = count;
+    cell2.innerHTML = parent1.label;
+    cell3.innerHTML = parent1.color;
+    cell3.setAttribute('class', parent1.color);
+    cell4.innerHTML = parent2.label;
+    cell5.innerHTML = parent2.color;
+    cell5.setAttribute('class', parent2.color);
+  }
+}
+
+function checkOffSpring() {
+  clearTable();
+  resultSet = [];
+  var pa = document.getElementById('pa').value;
+  var pb = document.getElementById('pb').value;
+  var geneA, geneB;
+  var g_r, g_y, g_w, g_s;
+  var totalResult = 0;
+  flagR = true;
+  flagY = true;
+  flagW = true;
+  flagS = false;
+
+  setFlower(document.getElementById('type').value);
 
   //make sure color exists
   geneA = getFlower(pa);
   geneB = getFlower(pb);
   if (geneA == undefined)
   {
-    alert('Invalid parent A. Please refer to the table.');
+    alert('Invalid parent A.');
     return;
   }
   if (geneB == undefined)
   {
-    alert('Invalid parent B. Please refer to the table.');
+    alert('Invalid parent B.');
     return;
   }
 
@@ -359,4 +383,9 @@ function clearTable()
 {
   document.getElementById("resultBody").innerHTML = '';
   document.getElementById("resultTable").setAttribute('style', '');
+}
+function clearTable2()
+{
+  document.getElementById("resultBody2").innerHTML = '';
+  document.getElementById("resultTable2").setAttribute('style', '');
 }
