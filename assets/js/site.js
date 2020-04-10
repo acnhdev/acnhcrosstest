@@ -1,226 +1,13 @@
-var roses = [
-//white
-{'r':'00','y':'00','w':'00','s':'00','color':'white','label':'w02'},
-{'r':'00','y':'00','w':'00','s':'01','color':'white','label':'w03'},
-{'r':'00','y':'00','w':'00','s':'11','color':'white','label':'w04'},
-{'r':'00','y':'00','w':'01','s':'01','color':'white','label':'w05'},
-{'r':'00','y':'00','w':'01','s':'11','color':'white','label':'w06'},
-{'r':'00','y':'01','w':'01','s':'00','color':'white','label':'w07'},
-{'r':'00','y':'01','w':'01','s':'01','color':'white','label':'w08'},
-{'r':'00','y':'01','w':'01','s':'11','color':'white','label':'w09'},
-{'r':'00','y':'11','w':'11','s':'00','color':'white','label':'w10'},
-{'r':'00','y':'11','w':'11','s':'01','color':'white','label':'w11'},
-{'r':'00','y':'11','w':'11','s':'11','color':'white','label':'w12'},
-{'r':'01','y':'00','w':'00','s':'11','color':'white','label':'w13'},
-{'r':'01','y':'00','w':'01','s':'11','color':'white','label':'w14'},
-{'r':'01','y':'01','w':'01','s':'11','color':'white','label':'w15'},
-{'r':'01','y':'11','w':'11','s':'11','color':'white','label':'w16'},
-{'r':'11','y':'01','w':'01','s':'11','color':'white','label':'w17'},
-{'r':'11','y':'11','w':'11','s':'11','color':'white','label':'w18'},
-{'r':'00','y':'00','w':'01','s':'00','color':'white','label':'w01'},
-//yellow
-{'r':'00','y':'01','w':'00','s':'00','color':'yellow','label':'y02'},
-{'r':'00','y':'01','w':'00','s':'01','color':'yellow','label':'y03'},
-{'r':'00','y':'01','w':'00','s':'11','color':'yellow','label':'y04'},
-{'r':'00','y':'11','w':'00','s':'01','color':'yellow','label':'y05'},
-{'r':'00','y':'11','w':'00','s':'11','color':'yellow','label':'y06'},
-{'r':'00','y':'11','w':'01','s':'00','color':'yellow','label':'y07'},
-{'r':'00','y':'11','w':'01','s':'01','color':'yellow','label':'y08'},
-{'r':'00','y':'11','w':'01','s':'11','color':'yellow','label':'y09'},
-{'r':'01','y':'01','w':'00','s':'01','color':'yellow','label':'y10'},
-{'r':'01','y':'01','w':'00','s':'11','color':'yellow','label':'y11'},
-{'r':'01','y':'11','w':'00','s':'01','color':'yellow','label':'y12'},
-{'r':'01','y':'11','w':'00','s':'11','color':'yellow','label':'y13'},
-{'r':'01','y':'11','w':'01','s':'01','color':'yellow','label':'y14'},
-{'r':'01','y':'11','w':'01','s':'11','color':'yellow','label':'y15'},
-{'r':'11','y':'01','w':'00','s':'11','color':'yellow','label':'y16'},
-{'r':'11','y':'11','w':'00','s':'11','color':'yellow','label':'y17'},
-{'r':'11','y':'11','w':'01','s':'11','color':'yellow','label':'y18'},
-{'r':'00','y':'11','w':'00','s':'00','color':'yellow','label':'y01'},
-//red
-{'r':'01','y':'00','w':'00','s':'00','color':'red','label':'r02'},
-{'r':'01','y':'00','w':'01','s':'00','color':'red','label':'r03'},
-{'r':'01','y':'00','w':'11','s':'00','color':'red','label':'r04'},
-{'r':'01','y':'01','w':'01','s':'00','color':'red','label':'r05'},
-{'r':'01','y':'01','w':'11','s':'00','color':'red','label':'r06'},
-{'r':'01','y':'11','w':'11','s':'00','color':'red','label':'r07'},
-{'r':'11','y':'00','w':'01','s':'01','color':'red','label':'r08'},
-{'r':'11','y':'00','w':'11','s':'01','color':'red','label':'r09'},
-{'r':'11','y':'01','w':'01','s':'00','color':'red','label':'r10'},
-{'r':'11','y':'01','w':'01','s':'01','color':'red','label':'r11'},
-{'r':'11','y':'01','w':'11','s':'01','color':'red','label':'r12'},
-{'r':'11','y':'11','w':'11','s':'01','color':'red','label':'r13'},
-{'r':'11','y':'00','w':'00','s':'01','color':'red','label':'r01'},
-//purple
-{'r':'00','y':'00','w':'11','s':'00','color':'purple','label':'u01'},
-{'r':'00','y':'00','w':'11','s':'01','color':'purple','label':'u02'},
-{'r':'00','y':'00','w':'11','s':'11','color':'purple','label':'u03'},
-{'r':'00','y':'01','w':'11','s':'00','color':'purple','label':'u04'},
-{'r':'00','y':'01','w':'11','s':'01','color':'purple','label':'u05'},
-{'r':'00','y':'01','w':'11','s':'11','color':'purple','label':'u06'},
-{'r':'01','y':'00','w':'11','s':'11','color':'purple','label':'u07'},
-{'r':'01','y':'01','w':'11','s':'11','color':'purple','label':'u08'},
-{'r':'11','y':'01','w':'11','s':'11','color':'purple','label':'u09'},
-//pink
-{'r':'01','y':'00','w':'00','s':'01','color':'pink','label':'p01'},
-{'r':'01','y':'00','w':'01','s':'01','color':'pink','label':'p02'},
-{'r':'01','y':'00','w':'11','s':'01','color':'pink','label':'p03'},
-{'r':'01','y':'01','w':'01','s':'01','color':'pink','label':'p04'},
-{'r':'01','y':'01','w':'11','s':'01','color':'pink','label':'p05'},
-{'r':'01','y':'11','w':'11','s':'01','color':'pink','label':'p06'},
-{'r':'11','y':'00','w':'00','s':'11','color':'pink','label':'p07'},
-{'r':'11','y':'00','w':'01','s':'11','color':'pink','label':'p08'},
-{'r':'11','y':'00','w':'11','s':'11','color':'pink','label':'p09'},
-//orange
-{'r':'01','y':'01','w':'00','s':'00','color':'orange','label':'o01'},
-{'r':'01','y':'11','w':'00','s':'00','color':'orange','label':'o02'},
-{'r':'01','y':'11','w':'01','s':'00','color':'orange','label':'o03'},
-{'r':'11','y':'01','w':'00','s':'00','color':'orange','label':'o04'},
-{'r':'11','y':'01','w':'00','s':'01','color':'orange','label':'o05'},
-{'r':'11','y':'11','w':'00','s':'00','color':'orange','label':'o06'},
-{'r':'11','y':'11','w':'00','s':'01','color':'orange','label':'o07'},
-{'r':'11','y':'11','w':'01','s':'00','color':'orange','label':'o08'},
-{'r':'11','y':'11','w':'01','s':'01','color':'orange','label':'o09'},
-//black
-{'r':'11','y':'00','w':'00','s':'00','color':'black','label':'h01'},
-{'r':'11','y':'00','w':'01','s':'00','color':'black','label':'h02'},
-{'r':'11','y':'00','w':'11','s':'00','color':'black','label':'h03'},
-{'r':'11','y':'01','w':'11','s':'00','color':'black','label':'h04'},
-//blue
-{'r':'11','y':'11','w':'11','s':'00','color':'blue','label':'b01'}
-];
-
-var pansies = [
-//blue
-{'r':'00','y':'00','w':'11','color':'blue','label':'b01'},
-{'r':'00','y':'01','w':'11','color':'blue','label':'b02'},
-{'r':'01','y':'00','w':'11','color':'blue','label':'b03'},
-//orange
-{'r':'01','y':'01','w':'00','color':'orange','label':'o01'},
-{'r':'01','y':'01','w':'01','color':'orange','label':'o02'},
-{'r':'01','y':'01','w':'11','color':'orange','label':'o03'},
-{'r':'11','y':'11','w':'00','color':'orange','label':'o04'},
-{'r':'11','y':'11','w':'01','color':'orange','label':'o05'},
-//purple
-{'r':'11','y':'00','w':'11','color':'purple','label':'u01'},
-{'r':'11','y':'01','w':'11','color':'purple','label':'u02'},
-{'r':'11','y':'11','w':'11','color':'purple','label':'u03'},
-//red
-{'r':'01','y':'00','w':'00','color':'red','label':'r02'},
-{'r':'01','y':'00','w':'01','color':'red','label':'r03'},
-{'r':'11','y':'00','w':'01','color':'red','label':'r04'},
-{'r':'11','y':'01','w':'00','color':'red','label':'r05'},
-{'r':'11','y':'01','w':'01','color':'red','label':'r06'},
-{'r':'11','y':'00','w':'00','color':'red','label':'r01'},
-//white
-{'r':'00','y':'00','w':'00','color':'white','label':'w02'},
-{'r':'00','y':'00','w':'01','color':'white','label':'w01'},
-//yellow
-{'r':'00','y':'01','w':'00','color':'yellow','label':'y02'},
-{'r':'00','y':'01','w':'01','color':'yellow','label':'y03'},
-{'r':'00','y':'11','w':'01','color':'yellow','label':'y04'},
-{'r':'00','y':'11','w':'11','color':'yellow','label':'y05'},
-{'r':'01','y':'11','w':'00','color':'yellow','label':'y06'},
-{'r':'01','y':'11','w':'01','color':'yellow','label':'y07'},
-{'r':'01','y':'11','w':'11','color':'yellow','label':'y08'},
-{'r':'00','y':'11','w':'00','color':'yellow','label':'y01'}
-]
-
-var cosmos = [
-//black
-{'r':'11','y':'11','s':'00','color':'black','label':'h01'},
-{'r':'11','y':'11','s':'01','color':'black','label':'h02'},
-//orange
-{'r':'01','y':'01','s':'00','color':'orange','label':'o01'},
-{'r':'01','y':'01','s':'01','color':'orange','label':'o02'},
-{'r':'01','y':'11','s':'00','color':'orange','label':'o03'},
-{'r':'01','y':'11','s':'01','color':'orange','label':'o04'},
-{'r':'01','y':'11','s':'11','color':'orange','label':'o05'},
-{'r':'11','y':'01','s':'00','color':'orange','label':'o06'},
-{'r':'11','y':'01','s':'01','color':'orange','label':'o07'},
-//pink
-{'r':'01','y':'00','s':'00','color':'pink','label':'p01'},
-{'r':'01','y':'00','s':'01','color':'pink','label':'p02'},
-{'r':'01','y':'00','s':'11','color':'pink','label':'p03'},
-{'r':'01','y':'01','s':'11','color':'pink','label':'p04'},
-//red
-{'r':'11','y':'00','s':'01','color':'red','label':'r02'},
-{'r':'11','y':'00','s':'11','color':'red','label':'r03'},
-{'r':'11','y':'01','s':'11','color':'red','label':'r04'},
-{'r':'11','y':'11','s':'11','color':'red','label':'r05'},
-{'r':'11','y':'00','s':'00','color':'red','label':'r01'},
-//white
-{'r':'00','y':'00','s':'00','color':'white','label':'w02'},
-{'r':'00','y':'00','s':'11','color':'white','label':'w03'},
-{'r':'00','y':'01','s':'11','color':'white','label':'w04'},
-{'r':'00','y':'00','s':'01','color':'white','label':'w01'},
-//yellow
-{'r':'00','y':'01','s':'00','color':'yellow','label':'y02'},
-{'r':'00','y':'01','s':'01','color':'yellow','label':'y03'},
-{'r':'00','y':'11','s':'00','color':'yellow','label':'y04'},
-{'r':'00','y':'11','s':'11','color':'yellow','label':'y05'},
-{'r':'00','y':'11','s':'01','color':'yellow','label':'y01'}
-];
-
-var tulips = [
-//black
-{'r':'11','y':'00','s':'00','color':'black','label':'h01'},
-{'r':'11','y':'01','s':'00','color':'black','label':'h02'},
-//orange
-{'r':'01','y':'01','s':'00','color':'orange','label':'o01'},
-{'r':'01','y':'11','s':'00','color':'orange','label':'o02'},
-//pink
-{'r':'01','y':'00','s':'01','color':'pink','label':'p01'},
-//purple
-{'r':'11','y':'11','s':'00','color':'purple','label':'u01'},
-{'r':'11','y':'11','s':'01','color':'purple','label':'u02'},
-{'r':'11','y':'11','s':'11','color':'purple','label':'u03'},
-//red
-{'r':'01','y':'00','s':'00','color':'red','label':'r02'},
-{'r':'11','y':'00','s':'11','color':'red','label':'r03'},
-{'r':'11','y':'01','s':'01','color':'red','label':'r04'},
-{'r':'11','y':'01','s':'11','color':'red','label':'r05'},
-{'r':'11','y':'00','s':'01','color':'red','label':'r01'},
-//white
-{'r':'00','y':'00','s':'00','color':'white','label':'w02'},
-{'r':'00','y':'00','s':'11','color':'white','label':'w03'},
-{'r':'00','y':'01','s':'11','color':'white','label':'w04'},
-{'r':'01','y':'00','s':'11','color':'white','label':'w05'},
-{'r':'00','y':'00','s':'01','color':'white','label':'w01'},
-//yellow
-{'r':'00','y':'01','s':'00','color':'yellow','label':'y02'},
-{'r':'00','y':'01','s':'01','color':'yellow','label':'y03'},
-{'r':'00','y':'11','s':'01','color':'yellow','label':'y04'},
-{'r':'00','y':'11','s':'11','color':'yellow','label':'y05'},
-{'r':'01','y':'01','s':'01','color':'yellow','label':'y06'},
-{'r':'01','y':'01','s':'11','color':'yellow','label':'y07'},
-{'r':'01','y':'11','s':'01','color':'yellow','label':'y08'},
-{'r':'01','y':'11','s':'11','color':'yellow','label':'y09'},
-{'r':'00','y':'11','s':'00','color':'yellow','label':'y01'}
-];
-
-var patterns = [
-{'pattern':'0000','outcome':1},
-{'pattern':'0001','outcome':2},
-{'pattern':'0011','outcome':1},
-{'pattern':'1100','outcome':1},
-{'pattern':'1101','outcome':2},
-{'pattern':'1111','outcome':1},
-{'pattern':'0100','outcome':2},
-{'pattern':'0101','outcome':3},
-{'pattern':'0111','outcome':2}
-];
-
-var patterns = [
-{'pattern':'0000','outcome':1,'child1':'00'},
-{'pattern':'0001','outcome':2,'child1':'00', 'child2':'01'},
-{'pattern':'0011','outcome':1,'child1':'01'},
-{'pattern':'1100','outcome':1,'child1':'01'},
-{'pattern':'1101','outcome':2,'child1':'10', 'child2':'11'},
-{'pattern':'1111','outcome':1,'child1':'11'},
-{'pattern':'0100','outcome':2,'child1':'00', 'child2':'01'},
-{'pattern':'0101','outcome':3,'child1':'00', 'child2':'11', 'child3':'01'},
-{'pattern':'0111','outcome':2,'child1':'01', 'child2':'11'}
+var crossTable = [
+{'pattern':'0000','outcome':['00','00','00','00'],'count':1},
+{'pattern':'0001','outcome':['00','01','00','01'],'count':2},
+{'pattern':'0011','outcome':['01','01','01','01'],'count':1},
+{'pattern':'1100','outcome':['01','01','01','01'],'count':1},
+{'pattern':'1101','outcome':['01','11','01','11'],'count':2},
+{'pattern':'1111','outcome':['11','11','11','11'],'count':1},
+{'pattern':'0100','outcome':['00','00','01','01'],'count':2},
+{'pattern':'0101','outcome':['00','01','01','11'],'count':3},
+{'pattern':'0111','outcome':['01','01','11','11'],'count':2}
 ];
 
 var count = 0;
@@ -228,7 +15,8 @@ var resultSet = new Array;
 var resultSet1 = new Array;
 var resultSet2 = new Array;
 var tmpArray = new Array;
-var flagR, flagY, flagW, flagS; 
+var flagR, flagY, flagW, flagS;
+var flower;
 
 function checkParent() {
   resultSet1 = [];
@@ -328,39 +116,50 @@ function checkOffSpring() {
   resultSet = [];
   var pa = document.getElementById('pa').value;
   var pb = document.getElementById('pb').value;
-  var genea, geneb, flower;
+  var geneA, geneB;
   var g_r, g_y, g_w, g_s;
   flagR = true;
   flagY = true;
   flagW = true;
-  flagS = true;
+  flagS = false;
 
   switch (document.getElementById('type').value) {
     case 'roses':
       flower = roses;
+      flagS = true;
       break;
     case 'pansies':
       flower = pansies;
-      flagS = false;
       break;
     case 'tulips':
       flower = tulips;
-      flagW = false;
       break;
     case 'cosmos':
       flower = cosmos;
-      flagW = false;
+      break;
+    case 'lilies':
+      flower = lilies;
+      break;
+    case 'windflowers':
+      flower = windflowers;
+      break;
+    case 'hyacinths':
+      flower = hyacinths;
+      break;
+    case 'mums':
+      flower = mums;
       break;
   }
-  genea = _.find(flower, { 'label':pa });
-  geneb = _.find(flower, { 'label':pb });
 
-  if (genea == undefined)
+  //make sure color exists
+  geneA = _.find(flower, { 'label':pa });
+  geneB = _.find(flower, { 'label':pb });
+  if (geneA == undefined)
   {
     alert('Invalid parent A. Please refer to the table.');
     return;
   }
-  if (geneb == undefined)
+  if (geneB == undefined)
   {
     alert('Invalid parent B. Please refer to the table.');
     return;
@@ -372,31 +171,31 @@ function checkOffSpring() {
   //set applicable gene
   if (flagR)
   {
-    g_r = _.find(patterns, { 'pattern':(genea.r + geneb.r) });
-    totalOutcome = totalOutcome * g_r.outcome;
+    g_r = _.find(crossTable, { 'pattern':(geneA.r + geneB.r) });
+    totalOutcome = totalOutcome * g_r.count;
     geneSet.push('r');
-    outcomeSet.push(g_r.outcome);
+    outcomeSet.push(g_r.count);
   }
   if (flagY)
   {
-    g_y = _.find(patterns, { 'pattern':(genea.y + geneb.y) });
-    totalOutcome = totalOutcome * g_y.outcome;
+    g_y = _.find(crossTable, { 'pattern':(geneA.y + geneB.y) });
+    totalOutcome = totalOutcome * g_y.count;
     geneSet.push('y');
-    outcomeSet.push(g_y.outcome);
+    outcomeSet.push(g_y.count);
   }
   if (flagW)
   {
-    g_w = _.find(patterns, { 'pattern':(genea.w + geneb.w) });
-    totalOutcome = totalOutcome * g_w.outcome;
+    g_w = _.find(crossTable, { 'pattern':(geneA.w + geneB.w) });
+    totalOutcome = totalOutcome * g_w.count;
     geneSet.push('w');
-    outcomeSet.push(g_w.outcome);
+    outcomeSet.push(g_w.count);
   }
   if (flagS)
   {
-    g_s = _.find(patterns, { 'pattern':(genea.s + geneb.s) });
-    totalOutcome = totalOutcome * g_s.outcome;
+    g_s = _.find(crossTable, { 'pattern':(geneA.s + geneB.s) });
+    totalOutcome = totalOutcome * g_s.count;
     geneSet.push('s');
-    outcomeSet.push(g_s.outcome);
+    outcomeSet.push(g_s.count);
   }
 
   //get list of gene outcome
@@ -472,22 +271,14 @@ function checkOffSpring() {
 function printResult(item, index) {
   count+=1;
   var result;
-  switch (document.getElementById('type').value) {
-    case 'roses':
-      result = _.find(roses, { 'r':item.r, 'y':item.y, 'w':item.w, 's':item.s });
-      break;
-    case 'pansies':
-      result = _.find(pansies, { 'r':item.r, 'y':item.y, 'w':item.w });
-      result.s = '-';
-      break;
-    case 'tulips':
-      result = _.find(tulips, { 'r':item.r, 'y':item.y, 's':item.s });
-      result.w = '-';
-      break;
-    case 'cosmos':
-      result = _.find(cosmos, { 'r':item.r, 'y':item.y, 's':item.s });
-      result.w = '-';
-      break;
+  if (document.getElementById('type').value == 'roses')
+  {
+    result = _.find(flower, { 'r':item.r, 'y':item.y, 'w':item.w, 's':item.s });
+  }
+  else
+  {
+    result = _.find(flower, { 'r':item.r, 'y':item.y, 'w':item.w });
+    result.s = '-';
   }
   var table = document.getElementById("resultTable").getElementsByTagName('tbody')[0];
   var row = table.insertRow();
@@ -498,6 +289,7 @@ function printResult(item, index) {
   var cell5 = row.insertCell(4);
   var cell6 = row.insertCell(5);
   var cell7 = row.insertCell(6);
+  var cell8 = row.insertCell(7);
   cell1.innerHTML = count;
   cell2.innerHTML = result.r;
   cell3.innerHTML = result.y;
@@ -506,14 +298,15 @@ function printResult(item, index) {
   cell6.innerHTML = result.color;
   cell6.setAttribute('class', result.color);
   cell7.innerHTML = result.label;
+  cell8.innerHTML = result.hex;
 }
 
 function getPattern(gene, order)
 {
   var pt = gene.pattern;
   var result;
-  if (gene.outcome==1) result = (pt.slice(0,1).concat(pt.slice(pt.length-1)));
-  if (gene.outcome==2)
+  if (gene.count==1) result = (pt.slice(0,1).concat(pt.slice(pt.length-1)));
+  if (gene.count==2)
   {
     if (order==1) 
     {
@@ -524,7 +317,7 @@ function getPattern(gene, order)
       result = (pt.substr(1,1).concat(pt.slice(pt.length-1)));
     }
   }
-  if (gene.outcome==3)
+  if (gene.count==3)
   {
     if (order==1)
     {
