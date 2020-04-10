@@ -25,7 +25,7 @@
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
-      <h1 class="project-name">ACNH Flower Crossbreeding Result Prediction</h1>
+      <h1 class="project-name">ACNH Flower Crossbreeding Simulator</h1>
       <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
 <!--  {% if site.github.is_project_page %}
         <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
@@ -37,12 +37,6 @@
     </header>
 
     <main id="content" class="main-content" role="main">
-      
-      <p>Not all flowers of same species and color are equal!! They might look alike but their genes can be different, and this will affect the offspring color and rate when being crossbred.</p>
-        
-      <p>For example, there is a total of 13 red rose variant. If you crossbreed 2 red roses, depending on the gene, the offspring they produce may be different.</p>
-      <img src="{{ '/assets/img/rose-difference.png' | relative_url }}" alt="genedifference" style="height:300px">
-      
       <p>The table below shows list of flowers and number of variants available for each color.</p>
       <div>
   <table style="font-size:0.8rem;">
@@ -160,21 +154,20 @@
         <span style="font-size:0.8rem;">* means seed is available in this color.</span>
 </div>
       
-<p>To keep track of flower gene, it is best that you start from seed as the gene of seed is fixed.</p>
-      
 <hr>
 
-<h1>FINDOUT POSSIBLE OFFSPRING</h1>
-      <p>Note : Only estimated, self pollination is not taken into account.</p>
+<h1>HOW TO USE THE SIMULATOR</h1>
+<p>Note : Simulation only, real game logic can be different, and self pollination is not taken into account.</p>
 
-<h4>DEFINING PARENT</h4>
-<p>Key in the two character hex value of the flowers (e.g. 00, 4f, ..)</p>
-<p>I have also created label for each variant for me to keep track of my flowers. You may use it to define the parents too. It is a 3 characters string, the first being the color code (refer table) followed by two digits number.</p>
-    <p>For example, r04 means red variant 4, u01 means purple variant 1 etc.</p>
-<p>Seed color will always be represented by number one e.g. r01 is red seed, y01 is yellow seed.</p>
-      
-<p>If you key in 'r01' for parent A and 'r01' for parent B, you will get the result for crossbreeding 2 red seed flower.</p>
-      
+<h4>DEFINING FLOWER VARIANT</h4>
+
+<p>You can use the two character hex value of the flowers. (e.g. 00, 4f, ..)</p>
+<p>I have also self-defined labels for each variant in order for me to keep track of my flowers. You may use it to define the flower too. It is a 3 characters string, the first being the color code (refer table) followed by two digits number.</p>
+<p>For example, r04 means red variant 4, u01 means purple variant 1 etc.</p>
+<p>Seed color will always be represented by number one, e.g. r01 is red seed, y01 is yellow seed.</p>
+
+<h5>Example</h5>      
+<p>To get result for crossing two red seed roses, I can use hex value and key in 'c1' for parent A and parent B. I can also use label which is 'r01'.</p>
       <div>
   <h4>SELECT FLOWER TYPE</h4>
   <label>Flower Type</label>
