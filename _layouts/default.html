@@ -37,9 +37,9 @@
 
     <main id="content" class="main-content" role="main">
       <div>
-  <h3>Table showing list of flowers and number of variant for each color. * means seed color.</h3>
+  <h4>Table showing list of flowers and number of variant for each color. * means seed color.</h4>
   <table style="font-size:0.8rem;">
-  <tr>
+  <tr class="lightgrey">
     <th>COLOR</th>
     <th>ROSE</th>
     <th>PANSY</th>
@@ -154,8 +154,10 @@
 
 <hr>
 
+<h1>FINDOUT POSSIBLE OFFSPRING</h1>
+
 <div>
-  <h3>1) SELECT FLOWER TYPE</h3>
+  <h4>1) SELECT FLOWER TYPE</h4>
   <label>Flower Type</label>
   <select id="type">
     <option value="roses">Rose</option>
@@ -170,8 +172,9 @@
 </div>
 
 <hr>
-
-<h3>2) FINDOUT POSSIBLE OFFSPRING</h3>
+<h4>2) Key In Parent Label Code/Hex Value</h4>
+<p>I have assigned each variant with a label code for me to keep track of my flower. It is a 3 characters string, the first being the color code (refer table) followed by two digits running number.</p>
+<p>Seed color will always be represented by number one e.g. r01 is red seed, y01 is yellow seed.</p>
 <div>
   <label>Parent A</label><input id="pa" placeholder="e.g. r01"></input>
 </div>
