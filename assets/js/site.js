@@ -74,18 +74,10 @@ function checkParent()
   if (flagY) possibleYPatterns = _.filter(crossTable, obj => obj.child1 == child.y || obj.child2 == child.y || obj.child3 == child.y);
   if (flagW) possibleWPatterns = _.filter(crossTable, obj => obj.child1 == child.w || obj.child2 == child.w || obj.child3 == child.w);
   if (flagS) possibleSPatterns = _.filter(crossTable, obj => obj.child1 == child.s || obj.child2 == child.s || obj.child3 == child.s);
-
-  console.log(flagW);
-  console.log(possibleWPatterns);
-
-  var totalOutcome = possibleRPatterns.length;
-  if (flagY) totalOutcome = totalOutcome * possibleYPatterns.length;
-  if (flagW) totalOutcome = totalOutcome * possibleWPatterns.length;
-  if (flagS) totalOutcome = totalOutcome * possibleSPatterns.length;
-
+  
   for (r=0; r<possibleRPatterns.length; r++)
   {
-    for (y=0; y<possibleRPatterns.length; y++)
+    for (y=0; y<possibleYPatterns.length; y++)
     {
       for (w=0; w<possibleWPatterns.length; w++)
       {
