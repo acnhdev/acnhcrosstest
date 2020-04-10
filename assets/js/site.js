@@ -99,7 +99,8 @@ function checkParent()
   }
 
   //remove duplicates
-  resultSet1.forEach(getDuplicate);
+  tmpArray = [];
+  getDuplicate();
   for (i=(tmpArray.length-1); i>=0; i--)
   {
     resultSet1.splice(tmpArray[i], 1);
@@ -111,19 +112,20 @@ function checkParent()
   resultSet1.forEach(printResult2);
 }
 
-function getDuplicate(item, index) {
-	for (i=(resultSet2.length-1); i>=0; i--)
-	{
-		var p2 = resultSet2[i];
-		if (p2 == item && (i!=index))
-		{
-			if (resultSet1[i] == resultSet2[index])
-			{
-				tmpArray.push(index);
-				break;
-			}
-		}
-	}
+function getDuplicate() {
+  for (i=0; i<resultSet1.length; i++)
+  {
+    for (j=i+1; j<resultSet2.length; j++)
+    {
+      if (resultSet2[j] == resultSet1[i])
+      {
+        if (resultSet1[j] == resultSet2[i])
+        {
+          tmpArray.push(j);
+        }
+      }
+    }
+  }
 }
 
 function printResult2(item, index) {
