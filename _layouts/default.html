@@ -24,7 +24,7 @@
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
-      <h1 class="project-name">ACNH Flower Crossbreeding Offspring Prediction</h1>
+      <h1 class="project-name">ACNH Flower Crossbreeding Result Prediction</h1>
       <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
 <!--  {% if site.github.is_project_page %}
         <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
@@ -40,12 +40,9 @@
       <p>Not all flowers of same species and color are equal!! They might look alike but their genes are different, and this will affect the offspring color and rate when being crossbred.</p>
         
       <p>For example, there is a total of 13 red rose variant. If you crossbreed 2 red roses, depending on the gene, the offspring they produce may be different.</p>
-      <img src="/FlowerResult/assets/img/rose-difference.png" alt="genedifference">
+      <img src="/FlowerResult/assets/img/rose-difference.png" alt="genedifference" style="height:300px">
       
       <p>The table below shows list of flowers and number of variants available for each color.</p>
-      
-      <p>To keep track of flower gene, it is best that you start from seed as the gene of seed is fixed.</p>
-      
       <div>
   <table style="font-size:0.8rem;">
   <tr class="lightgrey">
@@ -161,7 +158,9 @@
 </table>
         <span style="font-size:0.8rem;">* means seed is available in this color.</span>
 </div>
-
+      
+<p>To keep track of flower gene, it is best that you start from seed as the gene of seed is fixed.</p>
+      
 <hr>
 
 <h1>FINDOUT POSSIBLE OFFSPRING</h1>
@@ -178,21 +177,21 @@
   <label>Flower Type</label>
   <select id="type">
     <option value="roses">Rose</option>
-    <option value="pansies">Pansy</option>
-    <option value="tulips">Tulip</option>
     <option value="cosmos">Cosmos</option>
-    <option value="windflowers">Windflower</option>
     <option value="hyacinths">Hyacinth</option>
     <option value="lilies">Lily</option>
     <option value="mums">Mum</option>
+    <option value="pansies">Pansy</option>
+    <option value="tulips">Tulip</option>
+    <option value="windflowers">Windflower</option>
   </select>
 </div>
       
 <div>
-  <label>Parent A :</label><input id="pa" placeholder="e.g. 1c, r01"></input>
+  <label>Parent A</label><input id="pa" placeholder="e.g. 1c, r01"></input>
 </div>
 <div>
-  <label>Parent B :</label><input id="pb" placeholder="e.g. 03, y02"></input>
+  <label>Parent B</label><input id="pb" placeholder="e.g. 03, y02"></input>
 </div>
 <div>
   <button onclick="checkOffSpring()">Check Offspring</button>
