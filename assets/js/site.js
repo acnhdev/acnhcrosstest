@@ -118,6 +118,7 @@ function checkOffSpring() {
   var pb = document.getElementById('pb').value;
   var geneA, geneB;
   var g_r, g_y, g_w, g_s;
+  var totalResult = 0;
   flagR = true;
   flagY = true;
   flagW = true;
@@ -257,9 +258,14 @@ function checkOffSpring() {
       }
     }
     
+    totalResult += 1;
+    result.count = 1;
     resultSet.push(result);
-    //push again if 3 patterns as 1 pattern is repeated in order to reflect accurate percentage
-    if (current==3) resultSet.push(result);
+    //add count if 3 patterns as 1 pattern is repeated for percentage calculation
+    if (current==3) {
+      totalResult += 1;
+      resultSet[resultSet.length-1].count += 1;
+    }
   }
 
   //print result
@@ -290,6 +296,7 @@ function printResult(item, index) {
   var cell6 = row.insertCell(5);
   var cell7 = row.insertCell(6);
   var cell8 = row.insertCell(7);
+  var cell9 = row.insertCell(8);
   cell1.innerHTML = count;
   cell2.innerHTML = result.r;
   cell3.innerHTML = result.y;
@@ -299,6 +306,7 @@ function printResult(item, index) {
   cell6.setAttribute('class', result.color);
   cell7.innerHTML = result.label;
   cell8.innerHTML = result.hex;
+  cell9.innerHTML = Number(Math.round(item.count / resultSet.totalResult * 100 + 'e2') + 'e-2');
 }
 
 function getFlower(val) {
