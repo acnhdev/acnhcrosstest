@@ -64,6 +64,10 @@
     <option value="pansies">Pansy</option>
     <option value="tulips">Tulip</option>
     <option value="cosmos">Cosmos</option>
+    <option value="windflowers">Windflower</option>
+    <option value="hyacinths">Hyacinth</option>
+    <option value="lilies">Lily</option>
+    <option value="mums">Mum</option>
   </select>
 </div>
 
@@ -81,28 +85,12 @@
 
   <table id="resultTable" style="display:none;">
     <thead>
-      <tr><th>NO</th><th>R</th><th>Y</th><th>W</th><th>S</th><th>COLOR</th><th>LABEL</th></tr>
+      <tr><th>NO</th><th>R</th><th>Y</th><th>W</th><th>S</th><th>COLOR</th><th>LABEL</th><th>HEX</th></tr>
     </thead>
     <tbody id="resultBody">
     </tbody>
   </table>
 </div>
-
-<hr>
-
-<h3>ONLY FOR ROSES AT THE MOMENT</h3>
-<div>
-  <label>Result</label><input id="child" placeholder="e.g. b01"></input>
-</div>
-<button onclick="checkParent()">Check Parent</button>
-
-<table id="resultTable2" style="display:none;">
-  <thead>
-    <tr><th>NO</th><th>Parent 1</th><th>Color</th><th>Parent 2</th><th>Color</th></tr>
-  </thead>
-  <tbody id="resultBody2">
-  </tbody>
-</table>
 
       <footer class="site-footer">
         {% if site.github.is_project_page %}
