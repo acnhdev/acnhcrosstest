@@ -301,7 +301,6 @@ function printResult(item, index) {
   else
   {
     result = _.find(flower, { 'r':item.r, 'y':item.y, 'w':item.w });
-    result.s = '-';
   }
   var table = document.getElementById("resultTable").getElementsByTagName('tbody')[0];
   var row = table.insertRow();
