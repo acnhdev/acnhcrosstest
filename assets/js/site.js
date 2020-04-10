@@ -306,6 +306,8 @@ function printResult(item, index) {
   cell6.setAttribute('class', result.color);
   cell7.innerHTML = result.label;
   cell8.innerHTML = result.hex;
+	console.log(item.count);
+	console.log(resultSet.totalResult);
   cell9.innerHTML = Math.round(item.count / resultSet.totalResult * 100, 2);
 }
 
