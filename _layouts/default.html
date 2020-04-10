@@ -167,8 +167,8 @@
 <p>Seed color will always be represented by number one, e.g. r01 is red seed, y01 is yellow seed and w01 is yellow seed.</p>
 
 <h4>Example</h4>      
-<p>I want to get result for crossing two red seed roses, first I choose the flower type 'Rose', then key in 'r01' for both parent A and parent B. Click 'Check Offspring' and I will be able to see the result. (hex/flag value 'c1' can also be used, which you may refer to the linked articles)</p>
-<p>From the result I can see that I can get black rose(h01) as offspring. I want to know what will I get if I crossbreed it with a yellow seed rose, so I change the parent codes to 'h01' and 'y01' then check the result again.</p>
+<p>You want to know the result for crossing two red seed roses, select 'Check Offspring'. Choose flower type 'Rose', then key in 'r01' for both parent A and parent B. Click 'simulate' and you will get the result. (hex/flag value 'c1' can also be used)</p>
+<p>From the result you can see that black rose(h01) is one of the possible offspring. You want to know what will you get if you crossbreed it with a yellow seed rose, just update the parent codes to 'h01' and 'y01' then check the result again.</p>
 <div>
   <h4>SELECT FLOWER TYPE</h4>
   <label>Flower Type</label>
@@ -197,7 +197,7 @@
 		<label>Parent B</label><input id="pb" placeholder="e.g. y02, 03"></input>
 	</div>
 	<div>
-		<button onclick="checkOffSpring()">Check Offspring</button>
+		<button onclick="checkOffSpring()">Simulate</button>
 	</div>
     <table id="resultTable" style="display:none;">
 		<thead>
@@ -212,7 +212,7 @@
 	<div>
 		<label>Offspring</label><input id="child" placeholder="e.g. b01"></input>
 	</div>
-	<button onclick="checkParent()">Check Parent</button>
+	<button onclick="checkParent()">Simulate</button>
 
 	<table id="resultTable2" style="display:none;">
 		<thead>
