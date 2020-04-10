@@ -150,14 +150,18 @@ function printResult2(item, index) {
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
     var cell5 = row.insertCell(4);
+    var cell6 = row.insertCell(5);
+    var cell7 = row.insertCell(6);
     count+=1;
     cell1.innerHTML = count;
     cell2.innerHTML = parent1.label;
-    cell3.innerHTML = parent1.color;
-    cell3.setAttribute('class', parent1.color);
-    cell4.innerHTML = parent2.label;
-    cell5.innerHTML = parent2.color;
-    cell5.setAttribute('class', parent2.color);
+    cell3.innerHTML = parent1.hex;
+    cell4.innerHTML = parent1.color;
+    cell4.setAttribute('class', parent1.color);
+    cell5.innerHTML = parent2.label;
+    cell6.innerHTML = parent2.hex;
+    cell7.innerHTML = parent2.color;
+    cell7.setAttribute('class', parent2.color);
   }
 }
 
