@@ -127,14 +127,10 @@ function getDuplicate(item, index) {
 }
 
 function printResult2(item, index) {
-  console.log(item);
   var parent1 = _.find(flower, { 'r':item.substr(0,2), 'y':item.substr(2,2), 'w':item.substr(4,2), 's':item.slice(-2) });
   var parent2 = _.find(flower, { 'r':resultSet2[count].substr(0,2), 'y':resultSet2[count].substr(2,2), 'w':resultSet2[count].substr(4,2), 's':resultSet2[count].slice(-2) });
-  console.log(parent1);
-  console.log(parent2);
   if(parent1!=undefined && parent2!=undefined)
   {
-    console.log('found');
     var table = document.getElementById("resultTable2").getElementsByTagName('tbody')[0];
     var row = table.insertRow();
     var cell1 = row.insertCell(0);
