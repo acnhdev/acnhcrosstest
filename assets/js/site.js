@@ -152,8 +152,8 @@ function checkOffSpring() {
   }
 
   //make sure color exists
-  geneA = _.find(flower, { 'label':pa });
-  geneB = _.find(flower, { 'label':pb });
+  geneA = getFlower(pa);
+  geneB = getFlower(pb);
   if (geneA == undefined)
   {
     alert('Invalid parent A. Please refer to the table.');
@@ -299,6 +299,16 @@ function printResult(item, index) {
   cell6.setAttribute('class', result.color);
   cell7.innerHTML = result.label;
   cell8.innerHTML = result.hex;
+}
+
+function getFlower(val) {
+  if(val.length==2){
+    return _.find(flower, { 'hex':val.toLowerCase() });
+  }
+  else
+  {
+    return _.find(flower, { 'label':val });
+  }
 }
 
 function getPattern(gene, order)
