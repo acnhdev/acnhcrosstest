@@ -12,7 +12,7 @@
       </script>
     {% endif %}
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/acnhcrosstest/assets/css/site.css">
+    <link rel="stylesheet" href="{{ '/acnhcrosstest/assets/css/site.css' | relative_url }}">
 
 {% seo %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,7 +40,7 @@
       <p>Not all flowers of same species and color are equal!! They might look alike but their genes can be different, and this will affect the offspring color and rate when being crossbred.</p>
         
       <p>For example, there is a total of 13 red rose variant. If you crossbreed 2 red roses, depending on the gene, the offspring they produce may be different.</p>
-      <img src="{{ '/assets/img/rose-difference.png" alt="genedifference" style="height:300px"' }}>
+      <img src="{{ '/assets/img/rose-difference.png" alt="genedifference" style="height:300px"' | relative_url }}>
       
       <p>The table below shows list of flowers and number of variants available for each color.</p>
       <div>
@@ -216,7 +216,7 @@
     </main>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"></script>
-    <script type="text/javascript" src="{{ '/assets/js/flowerdb.js"' }}></script>
-    <script type="text/javascript" src="{{ '/assets/js/site.js"' }}></script>
+    <script type="text/javascript" src="{{ '/assets/js/flowerdb.js"' | relative_url }}></script>
+    <script type="text/javascript" src="{{ '/assets/js/site.js"' | relative_url }}></script>
   </body>
 </html>
