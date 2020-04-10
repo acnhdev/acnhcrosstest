@@ -197,7 +197,7 @@
 		<label>Parent B</label><input id="pb" placeholder="e.g. y02, 03"></input>
 	</div>
 	<div>
-		<button onclick="checkOffSpring()">Simulate</button>
+		<button onclick="checkOffSpring(document.getElementById('pa').value, document.getElementById('pb').value)">Simulate</button>
 	</div>
     <table id="resultTable" style="display:none;">
 		<thead>
@@ -212,11 +212,11 @@
 	<div>
 		<label>Offspring</label><input id="child" placeholder="e.g. b01"></input>
 	</div>
-	<button onclick="checkParent()">Simulate</button>
+	<button onclick="checkParent(document.getElementById('child').value)">Simulate</button>
 
 	<table id="resultTable2" style="display:none;">
 		<thead>
-			<tr class="lightgrey"><th>NO</th><th>Parent 1</th><th>Hex</th><th>Color</th><th>Parent 2</th><th>Hex</th><th>Color</th></tr>
+			<tr class="lightgrey"><th>NO</th><th>Parent 1</th><th>Hex</th><th>Color</th><th>Parent 2</th><th>Hex</th><th>Color</th><th>%</th></tr>
 		</thead>
 		<tbody id="resultBody2">
 		</tbody>
