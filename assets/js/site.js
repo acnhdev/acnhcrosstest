@@ -111,6 +111,7 @@ function checkParent(val)
   count=0;
   clearTable2();
   resultSet1.forEach(printResult2);
+  sortTableByNumber('resultTable2', 7);
 }
 
 function getDuplicate() {
@@ -142,7 +143,7 @@ function printResult2(item, index) {
       var result = _.find(flower, { 'r':resultSet[i].r, 'y':resultSet[i].y, 'w':resultSet[i].w, 's':resultSet[i].s });
       if (result.label == child.label)
       {
-        percentage = Number(Math.round(resultSet[i].count / resultSet.totalResult * 100 + 'e2') + 'e-2');
+        percentage = (resultSet[i].count / resultSet.totalResult * 100).toFixed(2);
         break;
       }
     }
@@ -313,6 +314,7 @@ function printOffspringResult()
   count=0;
   clearTable();
   resultSet.forEach(printResult);
+  sortTableByNumber('resultTable', 8);
 }
 
 function printResult(item, index) {
@@ -339,7 +341,7 @@ function printResult(item, index) {
   cell6.setAttribute('class', result.color);
   cell7.innerHTML = result.label;
   cell8.innerHTML = result.hex;
-  cell9.innerHTML = Number(Math.round(item.count / resultSet.totalResult * 100 + 'e2') + 'e-2');
+  cell9.innerHTML = (item.count / resultSet.totalResult * 100).toFixed(2);
 }
 
 function getFlower(val) {
@@ -396,4 +398,27 @@ function clearTable2()
 {
   document.getElementById("resultBody2").innerHTML = '';
   document.getElementById("resultTable2").setAttribute('style', '');
+}
+
+function sortTableByNumber(tableId, column) {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById(tableId);
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[column];
+      y = rows[i + 1].getElementsByTagName("TD")[column];
+      if (Number(x.innerHTML) < Number(y.innerHTML)) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
 }
