@@ -1,13 +1,13 @@
 var crossTable = [
-{'pattern':'0000','count':1,'child1':'00'},
-{'pattern':'0001','count':2,'child1':'00', 'child2':'01'},
-{'pattern':'0011','count':1,'child1':'01'},
-{'pattern':'1100','count':1,'child1':'01'},
-{'pattern':'1101','count':2,'child1':'01', 'child2':'11'},
-{'pattern':'1111','count':1,'child1':'11'},
-{'pattern':'0100','count':2,'child1':'00', 'child2':'01'},
-{'pattern':'0101','count':3,'child1':'00', 'child2':'11', 'child3':'01'},
-{'pattern':'0111','count':2,'child1':'01', 'child2':'11'}
+{'pattern':'0000','child1':'00'},
+{'pattern':'0001','child1':'00','child2':'01'},
+{'pattern':'0011','child1':'01'},
+{'pattern':'1100','child1':'01'},
+{'pattern':'1101','child1':'01','child2':'11'},
+{'pattern':'1111','child1':'11'},
+{'pattern':'0100','child1':'00','child2':'01'},
+{'pattern':'0101','child1':'00','child2':'01','child3':'11'},
+{'pattern':'0111','child1':'01','child2':'11'}
 ];
 
 var count = 0;
@@ -49,9 +49,7 @@ function setFlower(value) {
   }
 }
 
-function checkParent(val)
-{
-  clearTable2();
+function checkParent(val) {
   var possibleRPatterns, possibleYPatterns, possibleWPatterns, possibleSPatterns;
   resultSet = [];
   resultSet1 = [];
@@ -67,7 +65,7 @@ function checkParent(val)
   child = getFlower(val);
   if (child == undefined)
   {
-    alert('Invalid flower code.');
+    alert('Invalid child. Please refer to the table for valid variant.');
     return;
   }
 
@@ -75,7 +73,7 @@ function checkParent(val)
   if (flagY) possibleYPatterns = _.filter(crossTable, obj => obj.child1 == child.y || obj.child2 == child.y || obj.child3 == child.y);
   if (flagW) possibleWPatterns = _.filter(crossTable, obj => obj.child1 == child.w || obj.child2 == child.w || obj.child3 == child.w);
   if (flagS) possibleSPatterns = _.filter(crossTable, obj => obj.child1 == child.s || obj.child2 == child.s || obj.child3 == child.s);
-  
+
   for (r=0; r<possibleRPatterns.length; r++)
   {
     for (y=0; y<possibleYPatterns.length; y++)
@@ -109,9 +107,10 @@ function checkParent(val)
   }
 
   count=0;
-  clearTable2();
+  document.getElementById("resultBody2").innerHTML = '';
+  document.getElementById("resultTable2").setAttribute('style', '');
   resultSet1.forEach(printResult2);
-  sortTableByNumber('resultTable2', 7);
+  sortTableByNumber('resultTable2', 5);
 }
 
 function getDuplicate() {
@@ -140,7 +139,6 @@ function printResult2(item, index) {
     var colorCount = 0;
     for (i=0; i<resultSet.length; i++)
     {
-      if (resultSet[i].s==undefined) resultSet[i].s='00';
       var result = _.find(flower, { 'r':resultSet[i].r, 'y':resultSet[i].y, 'w':resultSet[i].w, 's':resultSet[i].s });
       if (result.color == child.color) colorCount += 1;
       if (result.label == child.label) percentage = (resultSet[i].count / resultSet.totalResult * 100).toFixed(2);
@@ -178,10 +176,8 @@ function checkOffSpring(pa, pb) {
 }
 
 function getOffSpringResult(pa, pb) {
-  resultSet = [];
   var geneA, geneB;
   var g_r, g_y, g_w, g_s;
-  var totalResult = 0;
   flagR = true;
   flagY = true;
   flagW = true;
@@ -194,118 +190,78 @@ function getOffSpringResult(pa, pb) {
   geneB = getFlower(pb);
   if (geneA == undefined)
   {
-    alert('Invalid parent A.');
+    alert('Invalid parent A. Please refer to the table for valid variant.');
     return;
   }
   if (geneB == undefined)
   {
-    alert('Invalid parent B.');
+    alert('Invalid parent B. Please refer to the table for valid variant.');
     return;
   }
 
-  var geneSet = new Array;
-  var outcomeSet = new Array;
-  var totalOutcome = 1;
   //set applicable gene
-  if (flagR)
-  {
-    g_r = _.find(crossTable, { 'pattern':(geneA.r + geneB.r) });
-    totalOutcome = totalOutcome * g_r.count;
-    geneSet.push('r');
-    outcomeSet.push(g_r.count);
-  }
-  if (flagY)
-  {
-    g_y = _.find(crossTable, { 'pattern':(geneA.y + geneB.y) });
-    totalOutcome = totalOutcome * g_y.count;
-    geneSet.push('y');
-    outcomeSet.push(g_y.count);
-  }
-  if (flagW)
-  {
-    g_w = _.find(crossTable, { 'pattern':(geneA.w + geneB.w) });
-    totalOutcome = totalOutcome * g_w.count;
-    geneSet.push('w');
-    outcomeSet.push(g_w.count);
-  }
-  if (flagS)
-  {
-    g_s = _.find(crossTable, { 'pattern':(geneA.s + geneB.s) });
-    totalOutcome = totalOutcome * g_s.count;
-    geneSet.push('s');
-    outcomeSet.push(g_s.count);
-  }
+  if (flagR) g_r = _.find(crossTable, { 'pattern':(geneA.r + geneB.r) });
+  if (flagY) g_y = _.find(crossTable, { 'pattern':(geneA.y + geneB.y) });
+  if (flagW) g_w = _.find(crossTable, { 'pattern':(geneA.w + geneB.w) });
+  if (flagS) g_s = _.find(crossTable, { 'pattern':(geneA.s + geneB.s) });
 
-  //get list of gene outcome
-  var current = 0;
-  var positionSet = new Array(geneSet.length);
-  for (i=0; i<positionSet.length-1; i++)
+  resultSet = new Array;
+  var currentR, currentY, currentW, currentS;
+  var totalOutcome = 0;
+  for (r=1; r<=4; r++)
   {
-    positionSet[i] = 1;
-  }
-  positionSet[positionSet.length-1] = 0;
-  var index = positionSet.length-1;
-
-  for (i=totalOutcome; i>0; i--)
-  {
-    //check for next outcome
-    positionSet[index] += 1;
-    while (index >= 0)
+    currentR = getPattern(g_r, r);
+    for (y=1; y<=4; y++)
     {
-      //if outcome is not valid
-      if (positionSet[index]>outcomeSet[index])
+      currentY = getPattern(g_y, y);
+      for (w=1; w<=4; w++)
       {
-        //reset current gene and shift to the next gene
-        positionSet[index] = 1;
-        index -= 1;
-        positionSet[index] += 1;
-        current = positionSet[index];
-        //reset gene index to initial position if change is valid
-        if (positionSet[index]<=outcomeSet[index])
+        currentW = getPattern(g_w, w);
+        if (flagS)
         {
-          index = positionSet.length-1;
-          break;
+          for (s=1; s<=4; s++)
+          {
+            currentS = getPattern(g_s, s);
+            setResult(resultSet, currentR, currentY, currentW, currentS);
+            totalOutcome += 1;
+          }
+        }
+        else
+        {
+          currentS = '00';
+          totalOutcome += 1;
+          setResult(resultSet, currentR, currentY, currentW, currentS);
         }
       }
-      else
-      {
-        break;
-      }
-    }
-
-    //get resulting gene pattern
-    var result = new Array;
-    for (j=0; j<geneSet.length; j++)
-    {
-      var obj = {};
-      switch (geneSet[j])
-      {
-        case 'r':
-          result.r = getPattern(g_r, positionSet[j]);
-          break;
-        case 'y':
-          result.y = getPattern(g_y, positionSet[j]);
-          break;
-        case 'w':
-          result.w = getPattern(g_w, positionSet[j]);
-          break;
-        case 's':
-          result.s = getPattern(g_s, positionSet[j]);
-          break;
-      }
-    }
-    
-    totalResult += 1;
-    result.count = 1;
-    resultSet.push(result);
-    //add count if 3 patterns as 1 pattern is repeated for percentage calculation
-    if (current==3) {
-      totalResult += 1;
-      resultSet[resultSet.length-1].count += 1;
     }
   }
-  resultSet.totalResult = totalResult;
-};
+  resultSet.totalResult = totalOutcome;
+}
+
+function setResult(arr, r, y, w, s)
+{
+  var result = new Array;
+  result.r = r;
+  result.y = y;
+  result.w = w;
+  result.s = s;
+
+  var flgFound = false;
+  for (i=0; i<arr.length; i++)
+  {
+    if (arr[i].r==result.r && arr[i].y==result.y && arr[i].w==result.w && arr[i].s==result.s)
+    {
+      arr[i].count += 1;
+      flgFound = true;
+      break;
+    }
+  }
+  if (!flgFound)
+  {
+    result.count = 1;
+    arr.push(result);
+  }
+}
 
 function printOffspringResult()
 {
@@ -318,7 +274,6 @@ function printOffspringResult()
 
 function printResult(item, index) {
   count+=1;
-  if (item.s==undefined) item.s='00';
   var result = _.find(flower, { 'r':item.r, 'y':item.y, 'w':item.w, 's':item.s });
   var table = document.getElementById("resultTable").getElementsByTagName('tbody')[0];
   var row = table.insertRow();
