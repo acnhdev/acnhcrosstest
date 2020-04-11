@@ -67,7 +67,7 @@ function checkParent(val)
   child = getFlower(val);
   if (child == undefined)
   {
-    alert('Invalid child. Please refer to the table for valid variant.');
+    alert('Invalid flower code.');
     return;
   }
 
