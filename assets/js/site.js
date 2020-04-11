@@ -110,7 +110,7 @@ function checkParent(val) {
   count=0;
   clearTable2();
   resultSet1.forEach(printResult2);
-  sortTable('resultBody2', 7, -1);
+  //sortTable('resultBody2', 7, -1);
 }
 
 function getDuplicate() {
@@ -269,7 +269,7 @@ function printOffspringResult()
   count=0;
   clearTable();
   resultSet.forEach(printResult);
-  sortTable('resultBody', 8, -1);
+  //sortTable('resultBody', 8, -1);
 }
 
 function printResult(item, index) {
