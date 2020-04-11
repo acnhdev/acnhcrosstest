@@ -137,15 +137,13 @@ function printResult2(item, index) {
   if(parent1!=undefined && parent2!=undefined)
   {
     getOffSpringResult(parent1.label, parent2.label);
+    var colorCount = 0;
     for (i=0; i<resultSet.length; i++)
     {
       if (resultSet[i].s==undefined) resultSet[i].s='00';
       var result = _.find(flower, { 'r':resultSet[i].r, 'y':resultSet[i].y, 'w':resultSet[i].w, 's':resultSet[i].s });
-      if (result.label == child.label)
-      {
-        percentage = (resultSet[i].count / resultSet.totalResult * 100).toFixed(2);
-        break;
-      }
+      if (result.color == child.color) colorCount += 1;
+      if (result.label == child.label) percentage = (resultSet[i].count / resultSet.totalResult * 100).toFixed(2);
     }
     
     var table = document.getElementById("resultTable2").getElementsByTagName('tbody')[0];
@@ -158,6 +156,7 @@ function printResult2(item, index) {
     var cell6 = row.insertCell(5);
     var cell7 = row.insertCell(6);
     var cell8 = row.insertCell(7);
+    var cell9 = row.insertCell(8);
     count+=1;
     cell2.innerHTML = parent1.label;
     cell3.innerHTML = parent1.hex;
@@ -168,6 +167,7 @@ function printResult2(item, index) {
     cell7.innerHTML = parent2.color;
     cell7.setAttribute('class', parent2.color);
     cell8.innerHTML = percentage;
+    cell9.innerHTML = colorCount;
   }
 }
 
