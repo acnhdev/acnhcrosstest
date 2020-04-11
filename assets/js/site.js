@@ -159,7 +159,6 @@ function printResult2(item, index) {
     var cell7 = row.insertCell(6);
     var cell8 = row.insertCell(7);
     count+=1;
-    cell1.innerHTML = count;
     cell2.innerHTML = parent1.label;
     cell3.innerHTML = parent1.hex;
     cell4.innerHTML = parent1.color;
@@ -332,7 +331,6 @@ function printResult(item, index) {
   var cell7 = row.insertCell(6);
   var cell8 = row.insertCell(7);
   var cell9 = row.insertCell(8);
-  cell1.innerHTML = count;
   cell2.innerHTML = result.r;
   cell3.innerHTML = result.y;
   cell4.innerHTML = result.w;
