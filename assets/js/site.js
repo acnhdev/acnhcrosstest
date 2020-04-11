@@ -50,6 +50,7 @@ function setFlower(value) {
 }
 
 function checkParent(val) {
+  clearTable2();
   var possibleRPatterns, possibleYPatterns, possibleWPatterns, possibleSPatterns;
   resultSet = [];
   resultSet1 = [];
@@ -107,8 +108,7 @@ function checkParent(val) {
   }
 
   count=0;
-  document.getElementById("resultBody2").innerHTML = '';
-  document.getElementById("resultTable2").setAttribute('style', '');
+  clearTable2();
   resultSet1.forEach(printResult2);
   sortTableByNumber('resultTable2', 5);
 }
