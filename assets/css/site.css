@@ -32,3 +32,10 @@
 .lightgrey {
  background-color:lightgrey;
 }
+
+#resultTable tbody tr td:nth-child(9) {
+ text-align: : right;
+}
+#resultTable2 tbody tr td:nth-child(8) {
+ text-align: : right;
+}
