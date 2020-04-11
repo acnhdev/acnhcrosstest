@@ -39,3 +39,15 @@
 #resultTable2 tbody tr td:nth-child(8) {
  text-align:right;
 }
+
+table tbody {
+  width: 50%;
+  counter-reset: row-num;
+}
+table tbody tr {
+  counter-increment: row-num;
+}
+table tbody tr td:first-child::before {
+    content: counter(row-num) ". ";
+}
+
