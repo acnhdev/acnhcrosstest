@@ -110,7 +110,7 @@ function checkParent(val) {
   count=0;
   clearTable2();
   resultSet1.forEach(printResult2);
-  sortTableByNumber('resultTable2', 7);
+  sortTable('resultBody2', 7, -1);
 }
 
 function getDuplicate() {
@@ -269,7 +269,7 @@ function printOffspringResult()
   count=0;
   clearTable();
   resultSet.forEach(printResult);
-  sortTableByNumber('resultTable', 8);
+  sortTable('resultBody', 8, -1);
 }
 
 function printResult(item, index) {
@@ -342,25 +342,36 @@ function clearTable2()
   document.getElementById("resultTable2").setAttribute('style', '');
 }
 
-function sortTableByNumber(tableId, column) {
-  var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementById(tableId);
-  switching = true;
-  while (switching) {
-    switching = false;
-    rows = table.rows;
-    for (i = 1; i < (rows.length - 1); i++) {
-      shouldSwitch = false;
-      x = rows[i].getElementsByTagName("TD")[column];
-      y = rows[i + 1].getElementsByTagName("TD")[column];
-      if (Number(x.innerHTML) < Number(y.innerHTML)) {
-        shouldSwitch = true;
-        break;
-      }
+function sortTable(tbodyId, col, asc)
+{
+    var tbody = document.getElementById(tbodyId);
+    var rows = tbody.rows;
+    var rlen = rows.length;
+    var arr = new Array();
+    var i, j, cells, clen;
+    // fill the array with values from the table
+    for(i = 0; i < rlen; i++)
+    {
+        cells = rows[i].cells;
+        clen = cells.length;
+        arr[i] = new Array();
+      for(j = 0; j < clen; j++) { arr[i][j] = cells[j].innerHTML; }
     }
-    if (shouldSwitch) {
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
+    // sort the array by the specified column number (col) and order (asc)
+    arr.sort(function(a, b)
+    {
+        var retval=0;
+        var fA=parseFloat(a[col]);
+        var fB=parseFloat(b[col]);
+        if(a[col] != b[col])
+        {
+            if((fA==a[col]) && (fB==b[col]) ){ retval=( fA > fB ) ? asc : -1*asc; } //numerical
+            else { retval=(a[col] > b[col]) ? asc : -1*asc;}
+        }
+        return retval;      
+    });
+    for(var rowidx=0;rowidx<rlen;rowidx++)
+    {
+        for(var colidx=0;colidx<arr[rowidx].length;colidx++){ tbody.rows[rowidx].cells[colidx].innerHTML=arr[rowidx][colidx]; }
     }
-  }
 }
