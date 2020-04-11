@@ -110,7 +110,9 @@ function checkParent(val) {
   count=0;
   clearTable2();
   resultSet1.forEach(printResult2);
-  //sortTable('resultBody2', 7, -1);
+  sortTable("resultBody2", 7, -1);
+  setColorClass('resultBody2', 3);
+  setColorClass('resultBody2', 6);
 }
 
 function getDuplicate() {
@@ -159,11 +161,9 @@ function printResult2(item, index) {
     cell2.innerHTML = parent1.label;
     cell3.innerHTML = parent1.hex;
     cell4.innerHTML = parent1.color;
-    cell4.setAttribute('class', parent1.color);
     cell5.innerHTML = parent2.label;
     cell6.innerHTML = parent2.hex;
     cell7.innerHTML = parent2.color;
-    cell7.setAttribute('class', parent2.color);
     cell8.innerHTML = percentage;
     cell9.innerHTML = colorCount;
   }
@@ -269,7 +269,8 @@ function printOffspringResult()
   count=0;
   clearTable();
   resultSet.forEach(printResult);
-  //sortTable('resultBody', 8, -1);
+  sortTable('resultBody', 8, -1);
+  setColorClass('resultBody', 5);
 }
 
 function printResult(item, index) {
@@ -291,7 +292,6 @@ function printResult(item, index) {
   cell4.innerHTML = result.w;
   cell5.innerHTML = result.s;
   cell6.innerHTML = result.color;
-  cell6.setAttribute('class', result.color);
   cell7.innerHTML = result.label;
   cell8.innerHTML = result.hex;
   cell9.innerHTML = (item.count / resultSet.totalResult * 100).toFixed(2);
@@ -374,4 +374,16 @@ function sortTable(tbodyId, col, asc)
     {
         for(var colidx=0;colidx<arr[rowidx].length;colidx++){ tbody.rows[rowidx].cells[colidx].innerHTML=arr[rowidx][colidx]; }
     }
+}
+
+function setColorClass(tbodyId, col)
+{
+  var tbody = document.getElementById(tbodyId);
+  var rows = tbody.rows;
+  var rlen = rows.length;
+  for(i = 0; i < rlen; i++)
+  {
+      cells = rows[i].cells;
+      cells[col].setAttribute('class', cells[col].innerHTML);
+  }
 }
