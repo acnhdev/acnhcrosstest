@@ -110,7 +110,7 @@ function checkParent(val) {
   count=0;
   clearTable2();
   resultSet1.forEach(printResult2);
-  sortTableByNumber('resultTable2', 5);
+  sortTableByNumber('resultTable2', 7);
 }
 
 function getDuplicate() {
