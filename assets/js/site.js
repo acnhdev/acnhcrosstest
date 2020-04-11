@@ -3,7 +3,7 @@ var crossTable = [
 {'pattern':'0001','count':2,'child1':'00', 'child2':'01'},
 {'pattern':'0011','count':1,'child1':'01'},
 {'pattern':'1100','count':1,'child1':'01'},
-{'pattern':'1101','count':2,'child1':'10', 'child2':'11'},
+{'pattern':'1101','count':2,'child1':'01', 'child2':'11'},
 {'pattern':'1111','count':1,'child1':'11'},
 {'pattern':'0100','count':2,'child1':'00', 'child2':'01'},
 {'pattern':'0101','count':3,'child1':'00', 'child2':'11', 'child3':'01'},
