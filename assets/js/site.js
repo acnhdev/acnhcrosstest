@@ -309,35 +309,24 @@ function getFlower(val) {
 
 function getPattern(gene, order)
 {
-  var pt = gene.pattern;
   var result;
-  if (gene.count==1) result = (pt.slice(0,1).concat(pt.slice(pt.length-1)));
-  if (gene.count==2)
+  var pt = gene.pattern;
+  switch (order)
   {
-    if (order==1) 
-    {
-      result = (pt.slice(0,1).concat(pt.substr(2,1)));
-    }
-    else
-    {
-      result = (pt.substr(1,1).concat(pt.slice(pt.length-1)));
-    }
+    case 1:
+      result = (pt.substr(0,1).concat(pt.substr(2,1)));
+      break;
+    case 2:
+      result = (pt.substr(0,1).concat(pt.substr(3,1)));
+      break;
+    case 3:
+      result = (pt.substr(1,1).concat(pt.substr(2,1)));
+      break;
+    case 4:
+      result = (pt.substr(1,1).concat(pt.substr(3,1)));
+      break;
   }
-  if (gene.count==3)
-  {
-    if (order==1)
-    {
-      result = (pt.slice(0,1).concat(pt.substr(2,1)));
-    }
-    else if (order==2)
-    {
-      result = (pt.substr(1,1).concat(pt.slice(pt.length-1)));
-    }
-    else
-    {
-      result = (pt.slice(0,1).concat(pt.slice(pt.length-1)));
-    }
-  }
+
   if (result=='10') result = '01';
   return result;
 }
