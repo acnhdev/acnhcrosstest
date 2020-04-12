@@ -341,6 +341,7 @@ function clearTable2()
 {
   document.getElementById("resultBody2").innerHTML = '';
   document.getElementById("parentResult").setAttribute('style', '');
+  document.getElementById('parentFilterBtn').setAttribute('style', '');
 }
 
 function sortTable(tbodyId, col, asc)
