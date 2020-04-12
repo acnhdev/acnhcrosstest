@@ -101,6 +101,7 @@ function checkParent(val) {
   //remove duplicates
   tmpArray = [];
   getDuplicate();
+  tmpArray.sort((a, b) => (a - b));
   for (i=(tmpArray.length-1); i>=0; i--)
   {
     resultSet1.splice(tmpArray[i], 1);
