@@ -342,6 +342,7 @@ function clearTable2()
   document.getElementById("resultBody2").innerHTML = '';
   document.getElementById("parentResult").setAttribute('style', '');
   document.getElementById('parentFilterBtn').setAttribute('style', '');
+  document.getElementById('colorFilterBtn').setAttribute('style', '');
 }
 
 function sortTable(tbodyId, col, asc)
@@ -419,4 +420,16 @@ function filterParentResult()
   filterTable('resultBody2', col2, child);
   alert('Result filtered');
   document.getElementById('parentFilterBtn').setAttribute('style', 'display:none');
+}
+
+function filterParentColorResult()
+{
+  var child = getFlower(document.getElementById('child').value);
+  var col1, col2;
+  col1 = 3;
+  col2 = 6;
+  filterTable('resultBody2', col1, child.color);
+  filterTable('resultBody2', col2, child.color);
+  alert('Result filtered');
+  document.getElementById('colorFilterBtn').setAttribute('style', 'display:none');
 }
