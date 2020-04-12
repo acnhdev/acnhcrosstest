@@ -191,10 +191,10 @@
 
 <div id="offspringTab" class="tabcontent">
 	<div>
-		<label>Parent A</label><input id="pa" placeholder="e.g. r01, c1"></input>
+		<label>Parent A</label><input id="pa" placeholder="e.g. r01, c1">
 	</div>
 	<div>
-		<label>Parent B</label><input id="pb" placeholder="e.g. y02, 03"></input>
+		<label>Parent B</label><input id="pb" placeholder="e.g. y02, 03">
 	</div>
 	<div>
 		<button onclick="checkOffSpring(document.getElementById('pa').value, document.getElementById('pb').value)">Simulate</button>
@@ -210,7 +210,7 @@
 
 <div id="parentTab" class="tabcontent">
 	<div>
-		<label>Offspring</label><input id="child" placeholder="e.g. b01"></input>
+		<label>Offspring</label><input id="child" placeholder="e.g. b01">
 	</div>
 	<button onclick="checkParent(document.getElementById('child').value)">Simulate</button>
 	
@@ -225,6 +225,25 @@
 		</tbody>
 	</table>
 	</div>
+</div>
+
+<div id="identifyTab" class="tabcontent">
+  <div>
+    <label>Possible Gene 1</label><input id="ga" placeholder="e.g. r01, c1">
+  </div>
+  <div>
+    <label>Possible Gene 2</label><input id="gb" placeholder="e.g. y02, 03">
+  </div>
+  <div>
+    <button onclick="checkIdentifier(document.getElementById('ga').value, document.getElementById('gb').value)">Simulate</button>
+  </div>
+    <table id="resultTable3" style="display:none;">
+    <thead>
+      <tr class="lightgrey"><th>NO</th><th>IDENTIFIER</th><th>Gene A</th><th>%</th><th>Gene B</th><th>%</th></tr>
+    </thead>
+    <tbody id="resultBody3">
+    </tbody>
+  </table>
 </div>
 
       <footer class="site-footer">
