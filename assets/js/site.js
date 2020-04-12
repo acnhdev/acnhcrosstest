@@ -49,6 +49,94 @@ function setFlower(value) {
   }
 }
 
+function checkIdentifier(ga, gb) {
+  var geneA, geneB;
+  var colorSet1 = new Array;
+  var colorSet2 = new Array;
+  var differenceA = new Array;
+  var differenceB = new Array;
+
+  clearTable3();
+  setFlower(document.getElementById('type').value);
+
+  geneA = getFlower(ga);
+  geneB = getFlower(gb);
+  if (geneA == undefined)
+  {
+    alert('Invalid gene A. Please refer to the table for valid variant.');
+    return;
+  }
+  if (geneB == undefined)
+  {
+    alert('Invalid gene B. Please refer to the table for valid variant.');
+    return;
+  }
+
+  for (l=0; l<flower.length; l++)
+  {
+    getOffSpringResult(flower[l].label, ga);
+    colorSet1 = getColorSet(resultSet);
+    getOffSpringResult(flower[l].label, gb);
+    colorSet2 = getColorSet(resultSet);
+
+    let uniqueA = [...new Set(colorSet1)]; 
+    let uniqueB = [...new Set(colorSet2)];
+
+    differenceA = uniqueA.filter(val => !uniqueB.includes(val));
+    differenceB = uniqueB.filter(val => !uniqueA.includes(val));
+    
+    if (differenceA.length!=0 || differenceB.length!=0)
+    {
+      document.getElementById("resultTable3").setAttribute('style', '');
+      var table = document.getElementById("resultTable3").getElementsByTagName('tbody')[0];
+      var row = table.insertRow();
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      var cell5 = row.insertCell(4);
+      var cell6 = row.insertCell(5);
+      cell2.innerHTML = flower[l].label;
+      var text = '';
+      if (differenceA.length!=0)
+      {
+        count = 0;
+        differenceA.forEach(function(item, index){
+          text = text + '<div class="' + item + ' idcolor">' + item + '</div>';
+          colorSet1.forEach(function(itm, idx){
+            if (itm == item) count += 1;
+          });
+        });
+        cell3.innerHTML = text;
+        cell4.innerHTML = (count / colorSet1.length * 100).toFixed(2);
+      }
+      text = '';
+      if (differenceB.length!=0)
+      {
+        count = 0;
+        differenceB.forEach(function(item, index){
+          text = text + '<div class="' + item + ' idcolor">' + item + '</div>';
+          colorSet2.forEach(function(itm, idx){
+            if (itm == item) count += 1;
+          });
+        });
+        cell5.innerHTML = text;
+        cell6.innerHTML = (count / colorSet2.length * 100).toFixed(2);
+      }
+    }
+  }
+}
+
+function getColorSet(array)
+{
+  var result = new Array;
+  for (j=0; j<array.length; j++)
+  {
+    result.push(_.find(flower, { 'r':array[j].r, 'y':array[j].y, 'w':array[j].w, 's':array[j].s }).color);
+  }
+  return result;
+}
+
 function checkParent(val) {
   clearTable2();
   var possibleRPatterns, possibleYPatterns, possibleWPatterns, possibleSPatterns;
@@ -343,6 +431,11 @@ function clearTable2()
   document.getElementById("parentResult").setAttribute('style', '');
   document.getElementById('parentFilterBtn').setAttribute('style', '');
   document.getElementById('colorFilterBtn').setAttribute('style', '');
+}
+function clearTable3()
+{
+  document.getElementById("resultBody3").innerHTML = '';
+  document.getElementById("resultTable3").setAttribute('style', '');
 }
 
 function sortTable(tbodyId, col, asc)
