@@ -484,6 +484,50 @@ function setColorClass(tbodyId, col)
       cells[col].setAttribute('class', cells[col].innerHTML);
   }
 }
+
+function setColorClass2(tbodyId, col)
+{
+  var tbody = document.getElementById(tbodyId);
+  var rows = tbody.rows;
+  var rlen = rows.length;
+  var color;
+  for(i = 0; i < rlen; i++)
+  {
+    cells = rows[i].cells;
+    switch (cells[col].innerHTML.substr(0,1))
+    {
+      case 'r':
+        color = 'red';
+        break;
+      case 'y':
+        color = 'yellow';
+        break;
+      case 'w':
+        color = 'white';
+        break;
+      case 'o':
+        color = 'orange';
+        break
+      case 'p':
+        color = 'pink';
+        break;
+      case 'b':
+        color = 'blue';
+        break;
+      case 'u':
+        color = 'purple';
+        break;
+      case 'h':
+        color = 'black';
+        break;
+      case 'g':
+        color = 'green';
+        break;
+    }
+    cells[col].setAttribute('class', color);
+  }
+}
+
 function filterTable(tbodyId, col, val)
 {
   var tbody = document.getElementById(tbodyId);
