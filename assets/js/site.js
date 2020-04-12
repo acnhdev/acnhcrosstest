@@ -96,7 +96,7 @@ function checkIdentifier(ga, gb) {
       var cell4 = row.insertCell(3);
       var cell5 = row.insertCell(4);
       var cell6 = row.insertCell(5);
-      cell2.innerHTML = flower[l].label;
+      cell2.innerHTML = flower[l].label + ' / ' + flower[l].hex;
       cell2.setAttribute('class', flower[l].color);
       var text = '';
       if (differenceA.length!=0)
