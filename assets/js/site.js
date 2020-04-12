@@ -388,3 +388,34 @@ function setColorClass(tbodyId, col)
       cells[col].setAttribute('class', cells[col].innerHTML);
   }
 }
+function filterTable(tbodyId, col, val)
+{
+  var tbody = document.getElementById(tbodyId);
+  var rows = tbody.rows;
+  var rlen = rows.length;
+  for(i = rlen-1; i >=0; i--)
+  {
+      cells = rows[i].cells;
+      if (cells[col].innerHTML==val) tbody.deleteRow(i);
+  }
+}
+
+function filterParentResult()
+{
+  var child = document.getElementById('child').value;
+  var col1, col2;
+  if (child.length==2)
+  {
+    col1 = 2;
+    col2 = 5;
+  }
+  else
+  {
+    col1 = 1;
+    col2 = 4;
+  }
+  filterTable('resultBody2', col1, child);
+  filterTable('resultBody2', col2, child);
+  alert('Result filtered');
+  document.getElementById('parentFilterBtn').setAttribute('style', 'display:none');
+}
