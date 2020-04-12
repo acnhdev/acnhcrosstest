@@ -340,7 +340,7 @@ function clearTable()
 function clearTable2()
 {
   document.getElementById("resultBody2").innerHTML = '';
-  document.getElementById("resultTable2").setAttribute('style', '');
+  document.getElementById("parentResult").setAttribute('style', '');
 }
 
 function sortTable(tbodyId, col, asc)
