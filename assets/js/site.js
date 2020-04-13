@@ -126,6 +126,7 @@ function checkIdentifier(ga, gb) {
       }
     }
   }
+  focusResult();
 }
 
 function getColorSet(array)
@@ -203,6 +204,7 @@ function checkParent(val) {
   sortTable("resultBody2", 7, -1);
   setColorClass('resultBody2', 3);
   setColorClass('resultBody2', 6);
+  focusResult();
 }
 
 function getDuplicate() {
@@ -361,7 +363,7 @@ function printOffspringResult()
   resultSet.forEach(printResult);
   sortTable('resultBody', 8, -1);
   setColorClass('resultBody', 5);
-  document.getElementById('div-prediction').scrollIntoView();
+  focusResult();
 }
 
 function printResult(item, index) {
@@ -571,4 +573,9 @@ function filterParentColorResult()
   filterTable('resultBody2', col2, child.color);
   alert('Result filtered');
   document.getElementById('colorFilterBtn').setAttribute('style', 'display:none');
+}
+
+function focusResult()
+{
+  document.getElementById('div-prediction').scrollIntoView();
 }
