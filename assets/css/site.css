@@ -7,7 +7,7 @@ html {
 }
 
 input, select {
-    border-radius: 20px;
+    border-radius: 5px;
     border: 2px solid darkgreen;
     padding: 10px 20px;
     margin: 5px;
