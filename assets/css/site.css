@@ -6,6 +6,13 @@ html {
   background-image: url('https://www.nintendo.com/content/dam/noa/en_US/games/switch/a/animal-crossing-new-horizons-switch/bg_animal_crossing_new_horizons.png');
 }
 
+input {
+    border-radius: 20px;
+    border: 2px solid darkgreen;
+    padding: 10px 20px;
+    margin: 5px;
+}
+
 .page-header
 {
  background-color: lightcyan;
