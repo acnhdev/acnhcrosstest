@@ -361,6 +361,7 @@ function printOffspringResult()
   resultSet.forEach(printResult);
   sortTable('resultBody', 8, -1);
   setColorClass('resultBody', 5);
+  document.getElementById('div-prediction').scrollIntoView();
 }
 
 function printResult(item, index) {
