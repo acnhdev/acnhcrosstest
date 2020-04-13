@@ -199,7 +199,7 @@
 		<label>Parent B</label><input id="pb" placeholder="e.g. y02, 03">
 	</div>
 	<div>
-		<button onclick="checkOffSpring(document.getElementById('pa').value, document.getElementById('pb').value)">Simulate</button>
+		<button class="button" onclick="checkOffSpring(document.getElementById('pa').value, document.getElementById('pb').value)">Simulate</button>
 	</div>
     <table id="resultTable" style="display:none;">
 		<thead>
@@ -214,11 +214,11 @@
 	<div>
 		<label>Offspring</label><input id="child" placeholder="e.g. b01">
 	</div>
-	<button onclick="checkParent(document.getElementById('child').value)">Simulate</button>
+	<button class="button" onclick="checkParent(document.getElementById('child').value)">Simulate</button>
 	
 <div id="parentResult" style="display:none;">
-<button id="parentFilterBtn" onclick="filterParentResult();">Remove parent=offspring</button>
-	<button id="colorFilterBtn" onclick="filterParentColorResult();">Remove color=offspring</button>
+<button class="button" id="parentFilterBtn" onclick="filterParentResult();">Remove parent=offspring</button>
+	<button class="button" id="colorFilterBtn" onclick="filterParentColorResult();">Remove color=offspring</button>
 	<table id="resultTable2">
 		<thead>
 			<tr class="lightgrey"><th>NO</th><th>Parent 1</th><th>Hex</th><th>Color</th><th>Parent 2</th><th>Hex</th><th>Color</th><th>%</th><th>CC</th></tr>
@@ -237,7 +237,7 @@
     <label>Possible Gene 2</label><input id="gb" placeholder="e.g. y02, 03">
   </div>
   <div>
-    <button onclick="checkIdentifier(document.getElementById('ga').value, document.getElementById('gb').value)">Simulate</button>
+    <button class="button" onclick="checkIdentifier(document.getElementById('ga').value, document.getElementById('gb').value)">Simulate</button>
   </div>
     <table id="resultTable3" style="display:none;">
     <thead>
