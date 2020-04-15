@@ -19,6 +19,13 @@ var flagR, flagY, flagW, flagS;
 var flower;
 var child;
 
+showFlower(document.getElementById('type'));
+
+function showFlower(sel)
+{
+  document.getElementById('img-flower').setAttribute('src', '/assets/img/' + sel.options[sel.selectedIndex].text + '-red.png');
+}
+
 function setFlower(value) {
   switch (value) {
     case 'roses':
@@ -56,7 +63,7 @@ function checkIdentifier(ga, gb) {
   var differenceA = new Array;
   var differenceB = new Array;
 
-  clearTable3();
+  clearTable(3);
   setFlower(document.getElementById('type').value);
 
   geneA = getFlower(ga);
@@ -87,7 +94,6 @@ function checkIdentifier(ga, gb) {
     
     if (differenceA.length!=0 || differenceB.length!=0)
     {
-      document.getElementById("resultTable3").setAttribute('style', '');
       var table = document.getElementById("resultTable3").getElementsByTagName('tbody')[0];
       var row = table.insertRow();
       var cell1 = row.insertCell(0);
@@ -126,6 +132,7 @@ function checkIdentifier(ga, gb) {
       }
     }
   }
+  showTable(3);
   focusResult();
 }
 
@@ -140,7 +147,6 @@ function getColorSet(array)
 }
 
 function checkParent(val) {
-  clearTable2();
   var possibleRPatterns, possibleYPatterns, possibleWPatterns, possibleSPatterns;
   resultSet = [];
   resultSet1 = [];
@@ -151,12 +157,14 @@ function checkParent(val) {
   flagW = true;
   flagS = false;
 
+  clearTable(2);
   setFlower(document.getElementById('type').value);
 
   child = getFlower(val);
+
   if (child == undefined)
   {
-    alert('Invalid child. Please refer to the table for valid variant.');
+    alert('Invalid offspring. Please refer to the table for valid variant.');
     return;
   }
 
@@ -199,11 +207,11 @@ function checkParent(val) {
   }
 
   count=0;
-  clearTable2();
   resultSet1.forEach(printResult2);
   sortTable("resultBody2", 7, -1);
   setColorClass('resultBody2', 3);
   setColorClass('resultBody2', 6);
+  showTable(2);
   focusResult();
 }
 
@@ -262,9 +270,13 @@ function printResult2(item, index) {
 }
 
 function checkOffSpring(pa, pb) {
-  clearTable();
+  clearTable(1);
   getOffSpringResult(pa, pb);
-  printOffspringResult();
+  if (resultSet.length!=0)
+  {
+    printOffspringResult();
+    showTable(1);
+  }
 }
 
 function getOffSpringResult(pa, pb) {
@@ -275,6 +287,7 @@ function getOffSpringResult(pa, pb) {
   flagW = true;
   flagS = false;
 
+  resultSet = new Array;
   setFlower(document.getElementById('type').value);
 
   //make sure color exists
@@ -297,7 +310,6 @@ function getOffSpringResult(pa, pb) {
   if (flagW) g_w = _.find(crossTable, { 'pattern':(geneA.w + geneB.w) });
   if (flagS) g_s = _.find(crossTable, { 'pattern':(geneA.s + geneB.s) });
 
-  resultSet = new Array;
   var currentR, currentY, currentW, currentS;
   var totalOutcome = 0;
   for (r=1; r<=4; r++)
@@ -359,17 +371,17 @@ function printOffspringResult()
 {
   //print result
   count=0;
-  clearTable();
+  clearTable(1);
   resultSet.forEach(printResult);
-  sortTable('resultBody', 8, -1);
-  setColorClass('resultBody', 5);
+  sortTable('resultBody1', 8, -1);
+  setColorClass('resultBody1', 5);
   focusResult();
 }
 
 function printResult(item, index) {
   count+=1;
   var result = _.find(flower, { 'r':item.r, 'y':item.y, 'w':item.w, 's':item.s });
-  var table = document.getElementById("resultTable").getElementsByTagName('tbody')[0];
+  var table = document.getElementById("resultTable1").getElementsByTagName('tbody')[0];
   var row = table.insertRow();
   var cell1 = row.insertCell(0);
   var cell2 = row.insertCell(1);
@@ -424,29 +436,27 @@ function getPattern(gene, order)
   return result;
 }
 
-function clearTable()
+function clearTable(num)
 {
-  document.getElementById("resultBody").innerHTML = '';
-  document.getElementById("resultTable").setAttribute('style', '');
-}
-function clearTable2()
-{
-  document.getElementById("resultBody2").innerHTML = '';
-  document.getElementById("parentResult").setAttribute('style', '');
-  document.getElementById('parentFilterBtn').setAttribute('style', '');
-  document.getElementById('colorFilterBtn').setAttribute('style', '');
-}
-function clearTable3()
-{
-  document.getElementById("resultBody3").innerHTML = '';
-  document.getElementById("resultTable3").setAttribute('style', '');
+  document.getElementById("resultBody" + num).innerHTML = '';
+  document.getElementById("div-result" + num).setAttribute('style', 'display:none;');
+  if (num==2)
+  {
+    document.getElementById('parentFilterBtn').setAttribute('style', '');
+    document.getElementById('colorFilterBtn').setAttribute('style', '');
+  }
 }
 
 function clearAllTables()
 {
-  clearTable();
-  clearTable2();
-  clearTable3();
+  clearTable(1);
+  clearTable(2);
+  clearTable(3);
+}
+
+function showTable(num)
+{
+  document.getElementById("div-result" + num).setAttribute('style', '');
 }
 
 function sortTable(tbodyId, col, asc)
