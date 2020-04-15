@@ -23,7 +23,7 @@ showFlower(document.getElementById('type'));
 
 function showFlower(sel)
 {
-  document.getElementById('img-flower').setAttribute('src', '/assets/img/' + sel.options[sel.selectedIndex].text + '-red.png');
+  document.getElementById('img-flower').setAttribute('src', 'assets/img/' + sel.options[sel.selectedIndex].text + '-red.png');
 }
 
 function setFlower(value) {
