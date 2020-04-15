@@ -444,9 +444,9 @@ function clearTable3()
 
 function clearAllTables()
 {
-  function clearTable();
-  function clearTable2();
-  function clearTable3();
+  clearTable();
+  clearTable2();
+  clearTable3();
 }
 
 function sortTable(tbodyId, col, asc)
