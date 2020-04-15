@@ -171,84 +171,90 @@
 <p>You want to know the result for crossing two red seed roses. Choose flower type 'Rose',select 'Check Offspring', then key in 'r01' for both parent A and parent B. Click 'Simulate' and you will get the result. (hex/flag value 'c1' can also be used)</p>
 <p>From the result you can see that black rose(h01) is one of the possible offsprings. You want to know what will you get if you crossbreed it with a yellow seed rose, just update the parent codes to 'h01' and 'y01' then check the result again.</p>
 <div id="div-prediction">
-<div>
-  <h4>SELECT FLOWER TYPE</h4>
-  <label>Flower Type</label>
-  <select id="type" onchange="clearAllTables()">
-    <option value="roses">Rose</option>
-    <option value="cosmos">Cosmos</option>
-    <option value="hyacinths">Hyacinth</option>
-    <option value="lilies">Lily</option>
-    <option value="mums">Mum</option>
-    <option value="pansies">Pansy</option>
-    <option value="tulips">Tulip</option>
-    <option value="windflowers">Windflower</option>
-  </select>
-</div>
-<h4>CHOOSE WHAT TO CHECK</h4>
-<div class="tab">
-  <button class="tablinks" onclick="openTab(event, 'offspringTab')">Check Offspring</button>
-  <button class="tablinks" onclick="openTab(event, 'parentTab')">Check Parent</button>
-  <button class="tablinks" onclick="openTab(event, 'identifyTab')">Check Identifier</button>
-</div>
-
-<div id="offspringTab" class="tabcontent">
-	<div>
-		<label>Parent A</label><input id="pa" placeholder="e.g. r01, c1">
-	</div>
-	<div>
-		<label>Parent B</label><input id="pb" placeholder="e.g. y02, 03">
-	</div>
-	<div>
-		<button class="button" onclick="checkOffSpring(document.getElementById('pa').value, document.getElementById('pb').value)">Simulate</button>
-	</div>
-    <table id="resultTable" style="display:none;">
-		<thead>
-			<tr class="lightgrey"><th>NO</th><th>R</th><th>Y</th><th>W</th><th>S</th><th><a onclick="sortTable('resultBody', 5, -1);setColorClass('resultBody', 5);">COLOR</a></th><th>LABEL</th><th>HEX</th><th><a onclick="sortTable('resultBody', 8, -1);setColorClass('resultBody', 5);">%</a></th></tr>
-		</thead>
-		<tbody id="resultBody">
-		</tbody>
-	</table>
-</div>
-
-<div id="parentTab" class="tabcontent">
-	<div>
-		<label>Offspring</label><input id="child" placeholder="e.g. b01">
-	</div>
-	<button class="button" onclick="checkParent(document.getElementById('child').value)">Simulate</button>
-	
-<div id="parentResult" style="display:none;">
-<button class="button" id="parentFilterBtn" onclick="filterParentResult();">Remove parent=offspring</button>
-	<button class="button" id="colorFilterBtn" onclick="filterParentColorResult();">Remove color=offspring</button>
-	<table id="resultTable2">
-		<thead>
-			<tr class="lightgrey"><th>NO</th><th>Parent 1</th><th>Hex</th><th>Color</th><th>Parent 2</th><th>Hex</th><th>Color</th><th>%</th><th>CC</th></tr>
-		</thead>
-		<tbody id="resultBody2">
-		</tbody>
-	</table>
-	</div>
-</div>
-
-<div id="identifyTab" class="tabcontent">
   <div>
-    <label>Possible Gene 1</label><input id="ga" placeholder="e.g. r01, c1">
+    <h4>SELECT FLOWER TYPE</h4>
+    <label>Flower Type</label>
+    <select id="type" onchange="showFlower(this);clearAllTables();">
+      <option value="roses">Rose</option>
+      <option value="cosmos">Cosmos</option>
+      <option value="hyacinths">Hyacinth</option>
+      <option value="lilies">Lily</option>
+      <option value="mums">Mum</option>
+      <option value="pansies">Pansy</option>
+      <option value="tulips">Tulip</option>
+      <option value="windflowers">Windflower</option>
+    </select>
+    <img id="img-flower" alt="flower image" style="height:50px;margin-bottom:-15px;">
   </div>
-  <div>
-    <label>Possible Gene 2</label><input id="gb" placeholder="e.g. y02, 03">
+  <h4>CHOOSE WHAT TO CHECK</h4>
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'offspringTab')">Check Offspring</button>
+    <button class="tablinks" onclick="openTab(event, 'parentTab')">Check Parent</button>
+    <button class="tablinks" onclick="openTab(event, 'identifyTab')">Check Identifier</button>
   </div>
-  <div>
-    <button class="button" onclick="checkIdentifier(document.getElementById('ga').value, document.getElementById('gb').value)">Simulate</button>
+
+  <div id="offspringTab" class="tabcontent">
+    <div>
+      <label>Parent A</label><input id="pa" placeholder="e.g. r01, c1">
+    </div>
+    <div>
+      <label>Parent B</label><input id="pb" placeholder="e.g. y02, 03">
+    </div>
+    <div>
+      <button class="button" onclick="checkOffSpring(document.getElementById('pa').value, document.getElementById('pb').value)">Simulate</button>
+    </div>
+    <div id="div-result1" style="display:none;">
+      <table id="resultTable1">
+        <thead>
+          <tr class="lightgrey"><th>NO</th><th>R</th><th>Y</th><th>W</th><th>S</th><th><a onclick="sortTable('resultBody1', 5, -1);setColorClass('resultBody1', 5);">COLOR</a></th><th>LABEL</th><th>HEX</th><th><a onclick="sortTable('resultBody1', 8, -1);setColorClass('resultBody1', 5);">%</a></th></tr>
+        </thead>
+        <tbody id="resultBody1">
+        </tbody>
+      </table>
+    </div>
   </div>
-    <table id="resultTable3" style="display:none;">
-    <thead>
-      <tr class="lightgrey"><th>NO</th><th>IDENTIFIER</th><th>Gene 1</th><th><a onclick="sortTable('resultBody3', 3, -1);setColorClass2('resultBody3', 1);">%</a></th><th>Gene 2</th><th><a onclick="sortTable('resultBody3', 5, -1);setColorClass2('resultBody3', 1);">%</a></th></tr>
-    </thead>
-    <tbody id="resultBody3">
-    </tbody>
-  </table>
+
+  <div id="parentTab" class="tabcontent">
+    <div>
+      <label>Offspring</label><input id="child" placeholder="e.g. b01">
+    </div>
+    <button class="button" onclick="checkParent(document.getElementById('child').value)">Simulate</button>
+
+    <div id="div-result2" style="display:none;">
+      <button class="button" id="parentFilterBtn" onclick="filterParentResult();">Remove parent=offspring</button>
+      <button class="button" id="colorFilterBtn" onclick="filterParentColorResult();">Remove color=offspring</button>
+      <table id="resultTable2">
+        <thead>
+          <tr class="lightgrey"><th>NO</th><th>Parent 1</th><th>Hex</th><th>Color</th><th>Parent 2</th><th>Hex</th><th>Color</th><th>%</th><th>CC</th></tr>
+        </thead>
+        <tbody id="resultBody2">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="identifyTab" class="tabcontent">
+    <div>
+      <label>Possible Gene 1</label><input id="ga" placeholder="e.g. r01, c1">
+    </div>
+    <div>
+      <label>Possible Gene 2</label><input id="gb" placeholder="e.g. y02, 03">
+    </div>
+    <div>
+      <button class="button" onclick="checkIdentifier(document.getElementById('ga').value, document.getElementById('gb').value)">Simulate</button>
+    </div>
+    <div id="div-result3" style="display:none;">
+      <table id="resultTable3">
+        <thead>
+          <tr class="lightgrey"><th>NO</th><th>IDENTIFIER</th><th>Gene 1</th><th><a onclick="sortTable('resultBody3', 3, -1);setColorClass2('resultBody3', 1);">%</a></th><th>Gene 2</th><th><a onclick="sortTable('resultBody3', 5, -1);setColorClass2('resultBody3', 1);">%</a></th></tr>
+        </thead>
+        <tbody id="resultBody3">
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-</div>
+	    
       <footer class="site-footer">
   <!--      {% if site.github.is_project_page %}
           <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
