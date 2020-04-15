@@ -23,7 +23,7 @@ showFlower(document.getElementById('type'));
 
 function showFlower(sel)
 {
-  document.getElementById('img-flower').setAttribute('src', 'tree/master/assets/img/' + sel.options[sel.selectedIndex].text + '-red.png');
+  document.getElementById('img-flower').setAttribute('src', 'https://github.com/acnhdev/acnhcrosstest/blob/master/assets/img/' + sel.options[sel.selectedIndex].text + '-red.png');
 }
 
 function setFlower(value) {
