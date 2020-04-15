@@ -442,6 +442,13 @@ function clearTable3()
   document.getElementById("resultTable3").setAttribute('style', '');
 }
 
+function clearAllTables()
+{
+  function clearTable();
+  function clearTable2();
+  function clearTable3();
+}
+
 function sortTable(tbodyId, col, asc)
 {
     var tbody = document.getElementById(tbodyId);
